@@ -3,13 +3,14 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    2. newWhiskyHandler
-    5. Toolbar and SideDrawer
-    6. CSS Module
-    7. Add style
+    1. Add random fetch
+    2. viewCorrectDataHandler
+    3. addWhiskyHandler
+    4. Create Modal for Add Whisky
     8. Add routing
     9. Create spinner and add then to axios fetch
-    10. Add About page
+    11. Add setting system
+    12. Add About page
  */
 
 class App extends Component {
