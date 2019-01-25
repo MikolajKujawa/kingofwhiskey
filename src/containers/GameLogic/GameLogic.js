@@ -1,20 +1,45 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/Modal';
 
 class GameLogic extends Component {
     state = {
         whisky: {
-            img: 'http://store.jackdaniels.co.uk/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/j/a/jack-daniels-tennessee-whiskey-bottle-front.png',
-            name: 'Jack Daniels',
-            country: 'USA',
-            region: 'Tennessee',
-            capacity: '0.7',
-            years: '2018'
+            img: '',
+            name: '',
+            country: '',
+            region: '',
+            capacity: '',
+            years: ''
         }
     };
 
-    TestDataHandler = (event) => {
+    componentDidMount() {
+        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/1.json')
+            .then(res => {
+                this.setState({
+                    whisky: res.data
+                })
+            })
+            .catch(err => {
+                return err;
+            })
+    };
+
+    nextWhiskyHandler = () => {
+        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/1.json')
+            .then(res => {
+                this.setState({
+                    whisky: res.data
+                });
+            })
+            .catch(err => {
+                return err;
+            })
+    };
+
+    testDataHandler = (event) => {
         switch (event.target.name) {
             case ('name'):
                 if (this.state.whisky.name === event.target.value) console.log('ok');
@@ -41,10 +66,10 @@ class GameLogic extends Component {
             <div>
                 <Modal
                     whisky={this.state.whisky}
-                    change={this.TestDataHandler}
+                    change={this.testDataHandler}
                 />
 
-                <button>Next</button>
+                <button onClick={this.nextWhiskyHandler}>Next</button>
             </div>
         );
     }

@@ -15,17 +15,21 @@ class NewWhisky extends Component {
         }
     };
 
-    newWhiskyHandler () {
-        
-    }
+    newWhiskyHandler = (event) => {
+        console.log(event.target);
+    };
 
     render() {
         return (
             <div>
                 <Modal
-                    change={this.newWhiskyHandler}
-                    newWhisky={this.state.newWhisky} />
+                    change={null}
+                    newWhisky={true}
+                    addWhisky={this.newWhiskyHandler}
+                    submit={true} />
             </div>
         );
     }
 }
+
+export default NewWhisky;
