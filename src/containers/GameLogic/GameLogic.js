@@ -3,6 +3,22 @@ import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/Modal';
 
+const defaultCorrect = {
+    name: 0,
+    country: 0,
+    region: 0,
+    capacity: 0,
+    years: 0
+};
+
+const defaultValue = {
+    name: '',
+    country: '',
+    region: '',
+    capacity: '',
+    years: ''
+};
+
 class GameLogic extends Component {
     state = {
         whisky: {
@@ -14,33 +30,91 @@ class GameLogic extends Component {
             years: ''
         },
         correct: {
-            name: false,
-            country: false,
-            region: false,
-            capacity: false,
-            years: false
-        }
+            name: 0,
+            country: 0,
+            region: 0,
+            capacity: 0,
+            years: 0
+        },
+        value: {
+            name: '',
+            country: '',
+            region: '',
+            capacity: '',
+            years: ''
+        },
+        loading: false
     };
 
     componentDidMount() {
-        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/1.json')
+        this.setState({ loading: true });
+
+        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky.json')
             .then(res => {
-                this.setState({
-                    whisky: res.data
-                });
-                console.log(res.data);
+                const randomWhisky = Math.floor(Math.random() * res.data.length);
+                console.log(randomWhisky);
+                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+randomWhisky+'.json')
+                    .then(res => {
+                        console.log(res.data);
+                        this.setState({
+                            whisky: res.data
+                        });
+                        this.setState({ loading: false });
+                    })
+                    .catch(err => {
+                        return err;
+                    })
             })
             .catch(err => {
                 return err;
             })
     };
 
+    componentDidUpdate() {
+        let correctCopy = { ...this.state.correct };
+
+        correctCopy = Object.keys(correctCopy)
+            .map(key =>{
+                return correctCopy[key];
+            });
+
+        let correctSum = correctCopy
+            .reduce((correctCopy, el) => {
+                return correctCopy + el;
+            }, 0);
+
+        if (correctSum===correctCopy.length) {
+            setTimeout(() => {
+                this.setState({ correct: defaultCorrect, value: defaultValue });
+                this.nextWhiskyHandler();
+            },1000)
+        }
+    }
+
+    viewCorrectDataHandler = (event) => {
+        let correctCopy = { ...this.state.correct };
+
+        correctCopy[event.target.name]=1;
+
+        this.setState({ correct: correctCopy });
+    };
+
     nextWhiskyHandler = () => {
-        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/1.json')
+        this.setState({ loading: true });
+        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky.json')
             .then(res => {
-                this.setState({
-                    whisky: res.data
-                });
+                const randomWhisky = Math.floor(Math.random() * res.data.length);
+                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+randomWhisky+'.json')
+                    .then(res => {
+                        console.log(res.data);
+                        this.setState({
+                            whisky: res.data
+                        });
+                        this.setState({ loading: false });
+                    })
+                    .catch(err => {
+                        return err;
+                    })
             })
             .catch(err => {
                 return err;
@@ -49,61 +123,27 @@ class GameLogic extends Component {
 
     testDataHandler = (event) => {
         const correctCopy = { ...this.state.correct };
-        switch (event.target.name) {
-            case ('name'):
-                if (this.state.whisky.name === event.target.value) {
-                    correctCopy['name']=true;
-                    this.setState({ correct: correctCopy })
-                } else {
-                    correctCopy['name']=false;
-                    this.setState({ correct: correctCopy })
-                }
-            break;
-            case ('country'):
-                if (this.state.whisky.country === event.target.value) {
-                    correctCopy['country']=true;
-                    this.setState({ correct: correctCopy })
-                } else {
-                    correctCopy['country']=false;
-                    this.setState({ correct: correctCopy })
-                }
-            break;
-            case ('region'):
-                if (this.state.whisky.region === event.target.value) {
-                    correctCopy['region']=true;
-                    this.setState({ correct: correctCopy })
-                } else {
-                    correctCopy['region']=false;
-                    this.setState({ correct: correctCopy })
-                }
-            break;
-            case ('capacity'):
-                if (this.state.whisky.capacity === event.target.value) {
-                    correctCopy['capacity']=true;
-                    this.setState({ correct: correctCopy })
-                } else {
-                    correctCopy['capacity']=false;
-                    this.setState({ correct: correctCopy })
-                }
-                break;
-            case ('years'):
-                if (this.state.whisky.years === event.target.value) {
-                    correctCopy['years']=true;
-                    this.setState({ correct: correctCopy })
-                } else {
-                    correctCopy['years']=false;
-                    this.setState({ correct: correctCopy })
-                }
-                break;
-            default:
-                break;
+        const whiskyCopy = { ...this.state.whisky };
+        const valueCopy = { ...this.state.value };
+
+        valueCopy[event.target.name]=event.target.value;
+
+        if (event.target.value===whiskyCopy[event.target.name]) {
+            correctCopy[event.target.name] = 1;
+        } else {
+            correctCopy[event.target.name] = 0;
         }
+
+        this.setState({ correct: correctCopy, value: valueCopy })
     };
 
     render() {
         return(
             <div>
                 <Modal
+                    loading={this.state.loading}
+                    viewHandler={this.viewCorrectDataHandler}
+                    value={this.state.value}
                     correct={this.state.correct}
                     whisky={this.state.whisky}
                     change={this.testDataHandler}

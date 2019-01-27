@@ -13,30 +13,14 @@
 }
 
 .Img img {
-    width: 450px;
+    max-width: 300px;
+    max-height: 500px;
+    margin-bottom: 50px;
 }
 
-input[type=text]
-{
-    margin-bottom: 25px;
-    width: 250px;
+.Input {
+    width: 320px;
     display: block;
-    color: #303030;
-    text-align: center;
-    border: 2px solid rgba(96, 32, 11, 0.5);
-    border-radius: 5px;
-    font-size: 22px;
-    padding: 10px;
-    /*background: rgba(96, 32, 11, 0.2);  */
-    background-color: #ddd;
-}
-
-input[type=text]:hover {
-    border: 2px solid #ff7575;
-}
-
-input[type=text].Correct {
-    background-color: #009b0f;
 }
 
 @media (max-width: 1050px) {
@@ -45,6 +29,6 @@ input[type=text].Correct {
     }
 
     .Img img {
-        width: 400px;
+        width: 200px;
     }
 }
