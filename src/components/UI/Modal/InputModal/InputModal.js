@@ -1,28 +1,65 @@
 import React from 'react';
 import './InputModal.scss';
 
-const inputModal = (props) => (
-    <React.Fragment>
+const inputModal = (props) => {
 
-        <div className="container">
-            <form className="flex-form">
-                <input
-                    className={props.correct ? "Correct" : ''}
-                    value={props.correct ? props.whisky : props.value}
-                    type="search"
-                    name={props.name}
-                    placeholder={props.inputName}
-                    onChange={props.change} />
-                <button
-                    type="button"
-                    className={props.correct ? "Correct" : null}
-                    disabled={props.correct}
-                    name={props.name}
-                    onClick={props.viewHandler}>Correct</button>
-            </form>
-        </div>
+    let input;
+    let button;
 
-    </React.Fragment>
-);
+    if (props.confirmData) {
+        input = (
+            <input
+                className={props.correct ? "Correct" : ''}
+                type="search"
+                name={props.name}
+                placeholder={props.inputName}
+                onChange={props.updateData} />
+        );
+
+        button = (
+            <button
+                type="button"
+                className={props.correct ? "Correct" : null}
+                disabled={props.correct}
+                name={props.name}
+                onClick={props.confirmData}>Confirm
+            </button>
+        );
+    } else {
+        input = (
+            <input
+                className={props.correct ? "Correct" : ''}
+                value={props.correct ? props.whisky : props.value}
+                type="search"
+                name={props.name}
+                placeholder={props.inputName}
+                onChange={props.change}/>
+        );
+
+        button = (
+            <button
+                type="button"
+                className={props.correct ? "Correct" : null}
+                disabled={props.correct}
+                name={props.name}
+                onClick={props.viewHandler}>Correct
+            </button>
+        );
+    }
+
+
+    return (
+        <React.Fragment>
+
+            <div className="container">
+                <form className="flex-form">
+                    {input}
+                    {button}
+                </form>
+            </div>
+
+        </React.Fragment>
+    );
+};
 
 export default inputModal;

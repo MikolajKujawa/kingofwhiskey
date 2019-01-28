@@ -53,11 +53,15 @@ class GameLogic extends Component {
             .then(res => {
                 const randomWhisky = Math.floor(Math.random() * res.data.length);
                 console.log(randomWhisky);
-                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+randomWhisky+'.json')
+                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+ randomWhisky +'.json')
                     .then(res => {
-                        console.log(res.data);
+                        const data = Object.keys(res.data)
+                            .map(key => {
+                                return res.data[key];
+                            });
+                        console.log( data[1] );
                         this.setState({
-                            whisky: res.data
+                            whisky: { ...data[0] }
                         });
                         this.setState({ loading: false });
                     })
@@ -104,11 +108,14 @@ class GameLogic extends Component {
         axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky.json')
             .then(res => {
                 const randomWhisky = Math.floor(Math.random() * res.data.length);
-                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+randomWhisky+'.json')
+                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+ randomWhisky +'.json')
                     .then(res => {
-                        console.log(res.data);
+                        const data = Object.keys(res.data)
+                            .map(key => {
+                                return res.data[key];
+                            });
                         this.setState({
-                            whisky: res.data
+                            whisky: { ...data[0] }
                         });
                         this.setState({ loading: false });
                     })
@@ -141,11 +148,8 @@ class GameLogic extends Component {
         return(
             <div>
                 <Modal
-                    loading={this.state.loading}
                     viewHandler={this.viewCorrectDataHandler}
-                    value={this.state.value}
-                    correct={this.state.correct}
-                    whisky={this.state.whisky}
+                    state={this.state}
                     change={this.testDataHandler}
                 />
             </div>

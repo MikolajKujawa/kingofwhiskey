@@ -3,7 +3,6 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Create dynamic Modal.js
     2. Create Modal for Add Whisky
     3. addWhiskyHandler
     4. Add routing
@@ -14,9 +13,9 @@ import Layout from './containers/Layout/Layout';
 class App extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Layout />
-      </div>
+      </React.Fragment>
     );
   }
 }
