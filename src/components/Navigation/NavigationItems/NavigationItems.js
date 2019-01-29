@@ -1,13 +1,22 @@
 import React from 'react';
 import classes from './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
+import { withRouter } from 'react-router-dom';
 
-const navigationItems = () => (
+const navigationItems = (props) => {
+
+    const activePage = (path) => {
+        return props.location.pathname === path;
+    };
+
+    return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem link="/" active>Play</NavigationItem>
-            <NavigationItem link="/addWhisky">Add Whisky</NavigationItem>
-            <NavigationItem link="/About">About</NavigationItem>
+            <NavigationItem link="/" active={activePage("/")}>Play</NavigationItem>
+            <NavigationItem link="/addWhisky" active={activePage("/addWhisky")}>Add Whisky</NavigationItem>
+            <NavigationItem link="/editWhisky" active={activePage("/editWhisky")}>Edit Whisky</NavigationItem>
+            <NavigationItem link="/about" active={activePage("/about")}>About</NavigationItem>
         </ul>
-);
+    );
+};
 
-export default navigationItems;
+export default withRouter(navigationItems);

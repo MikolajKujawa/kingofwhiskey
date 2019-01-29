@@ -8,7 +8,7 @@ import NewWhisky from "../NewWhisky/NewWhisky";
 
 class Layout extends Component {
     state = {
-        showSideDrawer: false
+        showSideDrawer: false,
     };
 
     sideDrawerClosedHandler = () => {

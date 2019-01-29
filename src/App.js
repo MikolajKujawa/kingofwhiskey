@@ -3,11 +3,15 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    2. Create Modal for Add Whisky
-    3. addWhiskyHandler
-    4. Add routing
-    5. Add setting system
-    6. Add About page
+    1. Upgrade InputModal code
+    2. Add Edit Whisky (list, edit and remove whiskey)
+    2. Add setting system
+    3. Add About page
+    4. Upgrade defaultValue
+    5. 404 error page
+    6. Error modal
+    7. Optimization code
+    8. Deploy all to server
  */
 
 class App extends Component {

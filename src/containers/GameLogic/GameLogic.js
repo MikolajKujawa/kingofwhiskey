@@ -3,73 +3,22 @@ import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/Modal';
 
-const defaultCorrect = {
-    name: 0,
-    country: 0,
-    region: 0,
-    capacity: 0,
-    years: 0
-};
-
-const defaultValue = {
-    name: '',
-    country: '',
-    region: '',
-    capacity: '',
-    years: ''
-};
+let defaultData;
 
 class GameLogic extends Component {
     state = {
-        whisky: {
-            img: '',
-            name: '',
-            country: '',
-            region: '',
-            capacity: '',
-            years: ''
-        },
-        correct: {
-            name: 0,
-            country: 0,
-            region: 0,
-            capacity: 0,
-            years: 0
-        },
-        value: {
-            name: '',
-            country: '',
-            region: '',
-            capacity: '',
-            years: ''
-        },
-        loading: false
+        loadingData: true
     };
 
     componentDidMount() {
-        this.setState({ loading: true });
-
-        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky.json')
+        axios.get('/defaultValue.json')
             .then(res => {
-                const randomWhisky = Math.floor(Math.random() * res.data.length);
-                console.log(randomWhisky);
-                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+ randomWhisky +'.json')
-                    .then(res => {
-                        const data = Object.keys(res.data)
-                            .map(key => {
-                                return res.data[key];
-                            });
-                        console.log( data[1] );
-                        this.setState({
-                            whisky: { ...data[0] }
-                        });
-                        this.setState({ loading: false });
-                    })
-                    .catch(err => {
-                        return err;
-                    })
+                defaultData=res.data;
+                this.setState(res.data);
+                this.randomWhiskyHandler();
             })
             .catch(err => {
+                console.log(err);
                 return err;
             })
     };
@@ -89,26 +38,18 @@ class GameLogic extends Component {
 
         if (correctSum===correctCopy.length) {
             setTimeout(() => {
-                this.setState({ correct: defaultCorrect, value: defaultValue });
-                this.nextWhiskyHandler();
+                this.setState({ ...defaultData });
+                this.randomWhiskyHandler();
             },1000)
         }
-    }
-
-    viewCorrectDataHandler = (event) => {
-        let correctCopy = { ...this.state.correct };
-
-        correctCopy[event.target.name]=1;
-
-        this.setState({ correct: correctCopy });
     };
 
-    nextWhiskyHandler = () => {
+    randomWhiskyHandler = () => {
         this.setState({ loading: true });
-        axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky.json')
+        axios.get('/whisky.json')
             .then(res => {
                 const randomWhisky = Math.floor(Math.random() * res.data.length);
-                axios.get('https://kingofwhiskey-27cda.firebaseio.com/whisky/'+ randomWhisky +'.json')
+                axios.get('/whisky/'+ randomWhisky +'.json')
                     .then(res => {
                         const data = Object.keys(res.data)
                             .map(key => {
@@ -126,6 +67,14 @@ class GameLogic extends Component {
             .catch(err => {
                 return err;
             })
+    };
+
+    viewCorrectDataHandler = (event) => {
+        let correctCopy = { ...this.state.correct };
+
+        correctCopy[event.target.name]=1;
+
+        this.setState({ correct: correctCopy });
     };
 
     testDataHandler = (event) => {
