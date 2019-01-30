@@ -3,8 +3,7 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Upgrade InputModal code
-    2. Add Edit Whisky (list, edit and remove whiskey)
+    1. Add Edit Whisky (display correct img, correct style config)
     2. Add setting system
     3. Add About page
     4. Upgrade defaultValue

@@ -5,6 +5,7 @@ import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.css';
 import { Route } from "react-router-dom";
 import NewWhisky from "../NewWhisky/NewWhisky";
+import EditWhisky from "../EditWhisky/EditWhisky";
 
 class Layout extends Component {
     state = {
@@ -33,6 +34,7 @@ class Layout extends Component {
                 <main className={classes.Content}>
                     <Route path="/" exact component={GameLogic} />
                     <Route path="/addWhisky" component={NewWhisky} />
+                    <Route path="/editWhisky" component={EditWhisky} />
                 </main>
             </React.Fragment>
         );

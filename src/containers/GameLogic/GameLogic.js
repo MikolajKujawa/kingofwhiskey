@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Modal from '../../components/UI/Modal/Modal';
+import Modal from '../../components/UI/Modal/ModalGame/ModalGame';
 
 let defaultData;
 
