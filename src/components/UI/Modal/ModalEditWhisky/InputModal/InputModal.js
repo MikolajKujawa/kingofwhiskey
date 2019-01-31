@@ -6,7 +6,7 @@ const inputModal = (props) => {
     let button;
     input = (
         <input
-            className={props.correct ? "Correct" : ''}
+            className={props.changeValue ? "Correct" : ''}
             id={props.id}
             value={props.value}
             type="search"
@@ -18,8 +18,7 @@ const inputModal = (props) => {
     button = (
         <button
             type="button"
-            className={props.correct ? "Correct" : null}
-            disabled={props.correct}
+            className={props.changeValue ? "Change" : null}
             name={props.name}
             id={props.id}
             onClick={props.edit}>Edit

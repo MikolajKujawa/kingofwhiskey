@@ -3,14 +3,11 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Add Edit Whisky (display correct img, correct style config)
-    2. Add setting system
-    3. Add About page
-    4. Upgrade defaultValue
-    5. 404 error page
-    6. Error modal
-    7. Optimization code
-    8. Deploy all to server
+    1. Add About page
+    2. 404 error page
+    3. Error modal
+    4. Optimization code
+    5. Deploy all to server
  */
 
 class App extends Component {
