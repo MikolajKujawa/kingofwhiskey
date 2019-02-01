@@ -6,9 +6,14 @@ import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
-        <DrawerToggle clicked={props.drawerToggleClicked} />
+        <DrawerToggle
+            toggleAbout={props.toggleAbout}
+            activeAbout={props.activeAbout}
+            clicked={props.drawerToggleClicked} />
         <nav className={classes.OnlyDesktop}>
-            <NavigationItems />
+            <NavigationItems
+                toggleAbout={props.toggleAbout}
+                activeAbout={props.activeAbout} />
         </nav>
         <div className={classes.Logo}>
             <Logo />

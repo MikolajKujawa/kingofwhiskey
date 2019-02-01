@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import withErrorHnadler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
 
 let defaultData;
 
-class NewWhisky extends Component {
+class NewWhisky extends PureComponent {
     state = {
         loadingData: true
     };
@@ -60,7 +61,7 @@ class NewWhisky extends Component {
     confirmDataHandler = (event) => {
         let confirmStateCopy = { ...this.state.confirm };
 
-        if (this.state.whisky[event.target.name].length < 3) {
+        if (this.state.whisky[event.target.name].length < 2) {
             confirmStateCopy[event.target.name]=0;
         } else {
             confirmStateCopy[event.target.name]=1;
@@ -95,4 +96,4 @@ class NewWhisky extends Component {
     }
 }
 
-export default NewWhisky;
+export default withErrorHnadler(NewWhisky, axios);

@@ -17,8 +17,6 @@ const ModalGame = (props) => {
         const activePage = (path) => {
             return props.state.currentPage === path.toString();
         };
-
-        console.log(activePage(2));
             
         inputs = Object.keys(props.state.whisky)
             .map(key => {

@@ -14,7 +14,7 @@ const navigationItems = (props) => {
             <NavigationItem link="/" active={activePage("/")}>Play</NavigationItem>
             <NavigationItem link="/addWhisky" active={activePage("/addWhisky")}>Add Whisky</NavigationItem>
             <NavigationItem link="/editWhisky" active={activePage("/editWhisky")}>Edit Whisky</NavigationItem>
-            <NavigationItem link="/about" active={activePage("/about")}>About</NavigationItem>
+            <NavigationItem link={null} active={props.activeAbout} toggleAbout={props.toggleAbout}>About</NavigationItem>
         </ul>
     );
 };

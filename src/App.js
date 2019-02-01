@@ -3,11 +3,9 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Add About page
-    2. 404 error page
-    3. Error modal
-    4. Optimization code
-    5. Deploy all to server
+    1. Create Logo
+    2. Optimization code
+    3. Deploy all to server
  */
 
 class App extends Component {

@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import withErrorHnadler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 
-class EditWhisky extends Component {
+class EditWhisky extends PureComponent {
     state = {
         loadingData: true,
     };
@@ -33,10 +34,10 @@ class EditWhisky extends Component {
                 if (!currentPage) currentPage=1;
 
                 this.setState({
-                    whisky: { ...whisky.splice(currentPage*5-5, currentPage*5) },
-                    value: { ...value.splice(currentPage, 5*currentPage) },
-                    changeValue: { ...changeValue.splice(currentPage, 5*currentPage) },
-                    fbKey: { ...fbKey.splice(currentPage, 5*currentPage) },
+                    whisky: { ...whisky.splice(pages-1, pages*5-1) },
+                    value: { ...value.splice(pages-1, pages*5-1) },
+                    changeValue: { ...changeValue.splice(pages-1, pages*5-1) },
+                    fbKey: { ...fbKey.splice(pages-1, pages*5-1) },
                     pages: pages,
                     currentPage: currentPage,
                     loadingData: false
@@ -55,12 +56,9 @@ class EditWhisky extends Component {
         let changeValueCopy = { ...this.state.changeValue };
         const whiskyDefaultValue = this.state.whisky[id][inputName];
 
-        if(event.target.value===whiskyDefaultValue) {
-            changeValueCopy[id][inputName]=false;
-        } else {
-            changeValueCopy[id][inputName]=true;
-        }
-        
+        changeValueCopy[id][inputName] =
+            !(event.target.value === whiskyDefaultValue || event.target.value.length < 2);
+
         valueCopy[id][inputName]=event.target.value;
 
         this.setState({ value: valueCopy })
@@ -73,20 +71,22 @@ class EditWhisky extends Component {
         let whiskyCopy = { ...this.state.whisky };
         let changeValueCopy = { ...this.state.changeValue };
 
-        whiskyCopy[id][inputName]=this.state.value[id][inputName];
-        
-        axios.put('/whisky/'+id+'/'+fbKey+'.json', whiskyCopy[id])
-            .then(res => {
-                changeValueCopy[id][inputName]=false;
-                this.setState({
-                    whisky: whiskyCopy,
-                    changeValue: changeValueCopy
-                });
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        if (this.state.value[id][inputName].length > 2) {
+            whiskyCopy[id][inputName]=this.state.value[id][inputName];
+            axios.put('/whisky/'+id+'/'+fbKey+'.json', whiskyCopy[id])
+                .then(res => {
+                    changeValueCopy[id][inputName]=false;
+                    this.setState({
+                        whisky: whiskyCopy,
+                        changeValue: changeValueCopy
+                    });
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err);
+                    return err;
+                })
+        }
     };
 
     render() {
@@ -101,4 +101,4 @@ class EditWhisky extends Component {
     }
 }
 
-export default EditWhisky;
+export default withErrorHnadler(EditWhisky, axios);

@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import withErrorHnadler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/ModalGame/ModalGame';
 
 let defaultData;
 
-class GameLogic extends Component {
+class GameLogic extends PureComponent {
     state = {
         loadingData: true
     };
@@ -61,10 +62,12 @@ class GameLogic extends Component {
                         this.setState({ loading: false });
                     })
                     .catch(err => {
+                        console.log(err);
                         return err;
                     })
             })
             .catch(err => {
+                console.log(err);
                 return err;
             })
     };
@@ -84,7 +87,7 @@ class GameLogic extends Component {
 
         valueCopy[event.target.name]=event.target.value;
 
-        if (event.target.value===whiskyCopy[event.target.name]) {
+        if (event.target.value.toLowerCase()===whiskyCopy[event.target.name].toLowerCase()) {
             correctCopy[event.target.name] = 1;
         } else {
             correctCopy[event.target.name] = 0;
@@ -106,4 +109,4 @@ class GameLogic extends Component {
     }
 }
 
-export default GameLogic;
+export default withErrorHnadler(GameLogic, axios);

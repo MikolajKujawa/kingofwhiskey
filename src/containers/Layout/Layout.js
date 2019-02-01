@@ -3,13 +3,16 @@ import GameLogic from '../GameLogic/GameLogic';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import classes from './Layout.css';
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import NewWhisky from "../NewWhisky/NewWhisky";
 import EditWhisky from "../EditWhisky/EditWhisky";
+import About from '../../components/UI/Window/About/About';
+import Window from "../../components/UI/Window/Window";
 
 class Layout extends Component {
     state = {
         showSideDrawer: false,
+        showModal: false
     };
 
     sideDrawerClosedHandler = () => {
@@ -22,19 +25,48 @@ class Layout extends Component {
         });
     };
 
+    modalToggleHandler = () => {
+        this.setState((prevState) => {
+            return {
+                showModal: !prevState.showModal,
+                showSideDrawer: !prevState.showSideDrawer };
+        })
+    };
+
     render() {
+        const AboutComponent = (
+            <About
+                show={this.state.showModal}
+                modalToggle={this.modalToggleHandler} />
+        );
+
+        const NotFound = (
+            <Window
+                show={!this.state.showModal}
+                modalToggle={null} >
+                <center><h2>Error 404</h2>This page does not exist!</center><br />
+            </Window>
+        );
+
         return (
             <React.Fragment>
-                <header>
-                    <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler} />
-                    <SideDrawer
-                        closed={this.sideDrawerClosedHandler}
-                        open={this.state.showSideDrawer} />
-                </header>
+                <Toolbar
+                    activeAbout={this.state.showModal}
+                    toggleAbout={this.modalToggleHandler}
+                    drawerToggleClicked={this.sideDrawerToggleHandler} />
+                <SideDrawer
+                    activeAbout={this.state.showModal}
+                    toggleAbout={this.modalToggleHandler}
+                    closed={this.sideDrawerClosedHandler}
+                    open={this.state.showSideDrawer} />
+                { this.state.showModal ? AboutComponent : null }
                 <main className={classes.Content}>
-                    <Route path="/" exact component={GameLogic} />
-                    <Route path="/addWhisky" component={NewWhisky} />
-                    <Route path="/editWhisky" component={EditWhisky} />
+                    <Switch>
+                        <Route path="/" exact component={GameLogic} />
+                        <Route path="/addWhisky" component={NewWhisky} />
+                        <Route path="/editWhisky" component={EditWhisky} />
+                        <Route render={() => NotFound} />
+                    </Switch>
                 </main>
             </React.Fragment>
         );

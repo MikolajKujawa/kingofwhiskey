@@ -19,7 +19,9 @@ const sideDrawer = (props) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems
+                        toggleAbout={props.toggleAbout}
+                        activeAbout={props.activeAbout} />
                 </nav>
             </div>
         </React.Fragment>
