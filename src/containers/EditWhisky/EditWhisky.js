@@ -33,11 +33,13 @@ class EditWhisky extends PureComponent {
 
                 if (!currentPage) currentPage=1;
 
+		let range = (currentPage-1)*5;
+
                 this.setState({
-                    whisky: { ...whisky.splice(pages-1, pages*5-1) },
-                    value: { ...value.splice(pages-1, pages*5-1) },
-                    changeValue: { ...changeValue.splice(pages-1, pages*5-1) },
-                    fbKey: { ...fbKey.splice(pages-1, pages*5-1) },
+                    whisky: { ...whisky.splice(range, range+5) },
+                    value: { ...value.splice(range, range+5) },
+                    changeValue: { ...changeValue.splice(range, range+5) },
+                    fbKey: { ...fbKey.splice(range, range+5) },
                     pages: pages,
                     currentPage: currentPage,
                     loadingData: false
