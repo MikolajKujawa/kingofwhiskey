@@ -3,9 +3,9 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Create Logo
-    2. Optimization code
-    3. Deploy all to server
+    1. Optimization code
+    2. Deploy all to server
+    *Fix Window animation
  */
 
 class App extends Component {

@@ -10,7 +10,7 @@ const About = (props) => (
         modalToggle={props.modalToggle}>
         <div className={classes.Content}>
             <div className={classes.Logo}>
-                <Logo />
+                <Logo black />
             </div>
 
             <h2>What is - KingOfWhiskey?</h2>

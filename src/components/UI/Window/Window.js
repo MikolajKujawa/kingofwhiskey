@@ -14,8 +14,7 @@ const Window = (props) => {
             <Backdrop show={props.show} clicked={props.modalToggle}/>
             <div className={ attachedClasses.join(' ')}
                  style={{
-                     transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                     opacity: props.show ? '1' : '0'
+                     position: props.show ? 'translateY(0)' : 'translateY(-100vh)'
                  }}>
                 {props.children}
             </div>

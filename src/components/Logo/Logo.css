@@ -6,5 +6,10 @@
 }
 
 .Logo img {
+    transition: all 0.3s ease-out;
     height: 100%;
+}
+
+.Logo img:hover {
+    height: 105%;
 }
