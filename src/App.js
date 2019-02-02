@@ -6,6 +6,7 @@ import Layout from './containers/Layout/Layout';
     1. Optimization code
     2. Deploy all to server
     *Fix Window animation
+    *Edit README files
  */
 
 class App extends Component {
