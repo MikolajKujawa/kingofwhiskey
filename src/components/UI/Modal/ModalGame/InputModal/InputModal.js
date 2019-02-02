@@ -2,19 +2,14 @@ import React from 'react';
 import '../../InputModal.scss';
 
 const inputModal = (props) => {
-    let input;
-    let button;
-    input = (
+    const input = [
         <input
             className={props.correct ? "Correct" : ''}
             value={props.correct ? props.whisky : props.value}
             type="search"
             name={props.name}
             placeholder={props.inputName}
-            onChange={props.change}/>
-    );
-
-    button = (
+            onChange={props.change}/>,
         <button
             type="button"
             className={props.correct ? "Correct" : null}
@@ -22,19 +17,15 @@ const inputModal = (props) => {
             name={props.name}
             onClick={props.viewHandler}>Correct
         </button>
-    );
-
+    ];
 
     return (
         <React.Fragment>
-
             <div className="container">
                 <form className="flex-form">
                     {input}
-                    {button}
                 </form>
             </div>
-
         </React.Fragment>
     );
 };

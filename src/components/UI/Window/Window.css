@@ -3,24 +3,27 @@
     z-index: 200;
     background-color: white;
     width: 70%;
+    display: flex;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px black;
     padding: 16px;
     left: 15%;
     top: 16%;
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
+    animation-name: Open;
+    animation-duration: 500ms;
 }
 
-.Open {
-    display: block;
+@-webkit-keyframes Open {
+    from {transform: translateY(100em);}
+    to {transform: translateX(0);}
 }
 
 .Close {
     display: none;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 750px) {
     .Modal {
         width: 500px;
         left: calc(50% - 250px);

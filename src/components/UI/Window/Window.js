@@ -6,16 +6,13 @@ const Window = (props) => {
     let attachedClasses = [classes.Modal, classes.Close];
 
     if (props.show) {
-        attachedClasses = [classes.Modal, classes.Open];
+        attachedClasses = [classes.Modal];
     }
 
     return (
         <React.Fragment>
             <Backdrop show={props.show} clicked={props.modalToggle}/>
-            <div className={ attachedClasses.join(' ')}
-                 style={{
-                     position: props.show ? 'translateY(0)' : 'translateY(-100vh)'
-                 }}>
+            <div className={ attachedClasses.join(' ') }>
                 {props.children}
             </div>
         </React.Fragment>

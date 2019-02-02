@@ -2,19 +2,13 @@ import React from 'react';
 import '../../InputModal.scss';
 
 const inputModal = (props) => {
-    let input;
-    let button;
-
-    input = (
+    const input = [
         <input
             className={props.correct ? "Correct" : ''}
             type="search"
             name={props.name}
             placeholder={props.inputName}
-            onChange={props.updateData} />
-    );
-
-    button = (
+            onChange={props.updateData} />,
         <button
             type="button"
             className={props.correct ? "Correct" : null}
@@ -22,19 +16,15 @@ const inputModal = (props) => {
             name={props.name}
             onClick={props.confirmData}>Confirm
         </button>
-    );
-
+    ];
 
     return (
         <React.Fragment>
-
             <div className="container">
                 <form className="flex-form">
                     {input}
-                    {button}
                 </form>
             </div>
-
         </React.Fragment>
     );
 };

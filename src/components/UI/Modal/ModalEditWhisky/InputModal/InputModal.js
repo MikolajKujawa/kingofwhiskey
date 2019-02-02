@@ -2,9 +2,7 @@ import React from 'react';
 import '../../InputModal.scss';
 
 const inputModal = (props) => {
-    let input;
-    let button;
-    input = (
+    const input = [
         <input
             className={props.changeValue ? "Correct" : ''}
             id={props.id}
@@ -12,10 +10,7 @@ const inputModal = (props) => {
             type="search"
             name={props.name}
             placeholder={props.inputName}
-            onChange={props.change}/>
-    );
-
-    button = (
+            onChange={props.change}/>,
         <button
             type="button"
             className={props.changeValue ? "Change" : null}
@@ -23,7 +18,7 @@ const inputModal = (props) => {
             id={props.id}
             onClick={props.edit}>Edit
         </button>
-    );
+    ];
 
 
     return (
@@ -32,7 +27,6 @@ const inputModal = (props) => {
             <div className="container">
                 <form className="flex-form">
                     {input}
-                    {button}
                 </form>
             </div>
 
