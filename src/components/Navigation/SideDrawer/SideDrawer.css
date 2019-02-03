@@ -13,11 +13,32 @@
     transition: transform 0.3s ease-out;
 }
 
-@media (min-width: 600px) {
-    .SideDrawer {
-        display: none;
-    }
+.Back {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    padding: 30px;
+    left: 0;
+    top: 0;
+    cursor: pointer;
 }
+.Back::before,
+.Back::after {
+     position: absolute;
+     top: 30px;
+     left: 20px;
+     content: '';
+     width: 20px;
+     height: 2px;
+     background: black;
+     display: block;
+}
+.Back::before {
+     transform: rotate(45deg);
+ }
+.Back::after {
+     transform: rotate(-45deg);
+ }
 
 .Open {
     transform: translateX(0);
@@ -31,4 +52,17 @@
     height: 25%;
     width: 25%;
     margin-bottom: 16px;
+    margin-left: 10%;
+}
+
+@media (min-width: 600px) {
+    .SideDrawer {
+        display: none;
+    }
+}
+
+@media (max-width: 320px) {
+    .Logo {
+        margin-left: 0;
+    }
 }

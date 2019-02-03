@@ -102,6 +102,7 @@ class GameLogic extends PureComponent {
                 <Modal
                     viewHandler={this.viewCorrectDataHandler}
                     state={this.state}
+                    next={this.randomWhiskyHandler}
                     change={this.testDataHandler}
                 />
             </div>

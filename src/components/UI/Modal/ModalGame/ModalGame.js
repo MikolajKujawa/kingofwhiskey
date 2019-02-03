@@ -17,7 +17,7 @@ const ModalGame = (props) => {
     } else {
         Img = (
             <div className={classes.Img}>
-                <p><img src={props.state.whisky.img} alt="whisky_img"/></p>
+                <p><img onClick={props.next} src={props.state.whisky.img} alt="whisky_img"/></p>
             </div>
         );
 
