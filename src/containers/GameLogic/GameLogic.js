@@ -14,8 +14,14 @@ class GameLogic extends PureComponent {
     componentDidMount() {
         axios.get('/defaultValue.json')
             .then(res => {
-                defaultData=res.data;
-                this.setState(res.data);
+                defaultData={
+                    correct: res.data.correct,
+                    whisky: res.data.whisky,
+                    value: res.data.value,
+                    loading: res.data.loading,
+                    loadingData: res.data.loadingData
+                };
+                this.setState(defaultData);
                 this.randomWhiskyHandler();
             })
             .catch(err => {

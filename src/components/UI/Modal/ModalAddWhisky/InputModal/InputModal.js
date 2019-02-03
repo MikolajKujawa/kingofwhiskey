@@ -5,7 +5,7 @@ const inputModal = (props) => {
     const input = [
         <input
             key={props.whisky+"input"}
-            className={props.correct ? "Correct" : ''}
+            className={props.correct ? classes.Correct : null}
             type="search"
             name={props.name}
             placeholder={props.inputName}
@@ -13,7 +13,7 @@ const inputModal = (props) => {
         <button
             key={props.whisky+"button"}
             type="button"
-            className={props.correct ? "Correct" : null}
+            className={props.correct ? classes.Correct : null}
             disabled={props.correct}
             name={props.name}
             onClick={props.confirmData}>Confirm

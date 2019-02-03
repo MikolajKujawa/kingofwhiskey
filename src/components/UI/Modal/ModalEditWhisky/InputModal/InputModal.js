@@ -5,7 +5,7 @@ const inputModal = (props) => {
     const input = [
         <input
             key={props.whisky+"input"}
-            className={props.changeValue ? "Correct" : ''}
+            className={props.changeValue ? classes.Change : null}
             id={props.id}
             value={props.value}
             type="search"
@@ -15,7 +15,7 @@ const inputModal = (props) => {
         <button
             key={props.whisky+"button"}
             type="button"
-            className={props.changeValue ? "Change" : null}
+            className={props.changeValue ? classes.Change : null}
             name={props.name}
             id={props.id}
             onClick={props.edit}>Edit

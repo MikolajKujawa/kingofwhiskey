@@ -1,5 +1,6 @@
 # King Of Whiskey
 [![Build Status](https://travis-ci.org/mateuszpijanowski/kingofwhiskey.svg?branch=master)](https://travis-ci.org/mateuszpijanowski/kingofwhiskey)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/be242f74-868e-45a3-8a50-2e40efad3843/deploy-status)](https://app.netlify.com/sites/kingofwhiskey/deploys)
 
 **KingOfWhiskey** is a web application where whisky fans can check yourself 
 knowledge about whisky names, types and countries based on whisky 

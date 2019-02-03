@@ -3,9 +3,7 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-    1. Optimization code
-    2. Deploy all to server
-    *Edit README files
+      *Optimization code
  */
 
 class App extends Component {

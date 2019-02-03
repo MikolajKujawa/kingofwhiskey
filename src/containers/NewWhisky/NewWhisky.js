@@ -14,8 +14,13 @@ class NewWhisky extends PureComponent {
     componentDidMount() {
         axios.get('/defaultValue.json')
             .then(res => {
-                defaultData=res.data;
-                this.setState(res.data);
+                defaultData={
+                    confirm: res.data.confirm,
+                    whisky: res.data.whisky,
+                    loading: res.data.loading,
+                    loadingData: res.data.loadingData
+                };
+                this.setState(defaultData);
             })
             .catch(err => {
                 console.log(err);
@@ -31,7 +36,6 @@ class NewWhisky extends PureComponent {
                 const nextRecord = res.data.length;
                 axios.post('/whisky/' + nextRecord + '.json', this.state.whisky)
                     .then(res => {
-                        console.log('test');
                         this.setState({ ...defaultData });
                     })
                     .catch(err => {
