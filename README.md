@@ -25,6 +25,7 @@ images.
 - Firebase 
 - Axios <i>18.0+</i>   
 - Babel <i>7.0</i>  
+- Node <i>11.9.0</i>  
 - Webpack <i>4.19.1</i> 
 
 ### WebStrong &copy;  
