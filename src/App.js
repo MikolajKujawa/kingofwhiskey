@@ -3,7 +3,7 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-      *Optimization code
+      *Optimization code and upgrade
  */
 
 class App extends Component {

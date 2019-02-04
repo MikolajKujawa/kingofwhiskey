@@ -30,6 +30,7 @@ const ModalGame = (props) => {
                 return (
                     <InputModal
                         key={key}
+                        help={props.state.helpInfo[key]}
                         correct={props.state.correct[key]}
                         value={props.state.value[key]}
                         whisky={props.state.whisky[key]}

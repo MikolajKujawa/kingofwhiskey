@@ -8,7 +8,7 @@ let defaultData;
 
 class GameLogic extends PureComponent {
     state = {
-        loadingData: true
+        loadingData: true,
     };
 
     componentDidMount() {
@@ -19,7 +19,8 @@ class GameLogic extends PureComponent {
                     whisky: res.data.whisky,
                     value: res.data.value,
                     loading: res.data.loading,
-                    loadingData: res.data.loadingData
+                    loadingData: res.data.loadingData,
+                    helpInfo: res.data.helpInfo
                 };
                 this.setState(defaultData);
                 this.randomWhiskyHandler();

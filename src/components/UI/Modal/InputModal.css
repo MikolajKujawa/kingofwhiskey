@@ -37,7 +37,6 @@ input.Correct {
 .flex-form {
     display: -webkit-box;
     display: flex;
-    z-index: 10;
     position: relative;
     height: 50px;
     box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
@@ -52,4 +51,68 @@ input.Correct {
     border-radius: 0;
     outline: 0;
     -webkit-appearance: none;
+}
+
+.Tooltip {
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    line-height: 55px;
+}
+
+.Tooltip i {
+    opacity: 0.8;
+}
+
+.TooltipText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Tooltip .TooltipText {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    line-height: 20px;
+    width: 200px;
+    height: 62px;
+    position: absolute;
+    bottom: -15%;
+    margin-left: -230px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.Tooltip .TooltipText::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.Tooltip:hover .TooltipText,
+.Tooltip:hover i {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 1050px) {
+    .Tooltip .TooltipText {
+        bottom: 0;
+        position: fixed;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        z-index: 10;
+        padding: 0;
+        border-radius: 0;
+    }
 }

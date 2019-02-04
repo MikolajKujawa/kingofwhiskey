@@ -19,7 +19,7 @@ images.
 - API powered by Firebase
 
 ## Technologies  
-<b>KingOfWhiskey</b> was created together with:  
+**KingOfWhiskey** was created together with:  
   
 - React <i>16.7</i>  
 - React router <i>4.3.1+</i>  

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import GameLogic from '../GameLogic/GameLogic';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -9,7 +9,7 @@ import EditWhisky from "../EditWhisky/EditWhisky";
 import About from '../../components/UI/Window/About/About';
 import Window from "../../components/UI/Window/Window";
 
-class Layout extends Component {
+class Layout extends PureComponent {
     state = {
         showSideDrawer: false,
         showModal: false
