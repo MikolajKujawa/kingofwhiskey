@@ -45,7 +45,7 @@ const ModalGame = (props) => {
         <React.Fragment>
             <div className={classes.Game}>
                 {Img}
-                <div className={classes.Input}>
+                <div>
                     {inputs}
                 </div>
             </div>

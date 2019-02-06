@@ -34,17 +34,19 @@ class Layout extends PureComponent {
     };
 
     render() {
-        const AboutComponent = (
+        const aboutComponent = (
             <About
                 show={this.state.showModal}
                 modalToggle={this.modalToggleHandler} />
         );
 
-        const NotFound = (
+        const notFoundError = (
             <Window
                 show={!this.state.showModal}
-                modalToggle={null} >
-                <center><h2>Error 404</h2>This page does not exist!</center><br />
+                modalToggle={null}>
+                <div style={{paddingBottom: '25px', textAlign: 'center', margin: 'auto'}}>
+                    <h2>Error 404</h2>This page does not exist!
+                </div>
             </Window>
         );
 
@@ -59,13 +61,13 @@ class Layout extends PureComponent {
                     toggleAbout={this.modalToggleHandler}
                     closed={this.sideDrawerClosedHandler}
                     open={this.state.showSideDrawer} />
-                { this.state.showModal ? AboutComponent : null }
+                { this.state.showModal ? aboutComponent : null }
                 <main className={classes.Content}>
                     <Switch>
                         <Route path="/" exact component={GameLogic} />
                         <Route path="/addWhisky" component={NewWhisky} />
                         <Route path="/editWhisky" component={EditWhisky} />
-                        <Route render={() => NotFound} />
+                        <Route render={() => notFoundError} />
                     </Switch>
                 </main>
             </React.Fragment>

@@ -22,7 +22,6 @@ const inputModal = (props) => {
         </button>
     ];
 
-
     return (
         <React.Fragment>
             <div className={classes.container}>

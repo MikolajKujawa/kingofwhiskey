@@ -31,7 +31,7 @@ const ModalGame = (props) => {
                     Object.keys((props.state.whisky[key]))
                         .map(key2 => {
                             return (
-                                <div className={classes.Input}>
+                                <div>
                                     <InputModal
                                         key={key+key2}
                                         changeValue={props.state.changeValue[key][key2]}

@@ -37,6 +37,7 @@ class NewWhisky extends PureComponent {
                 axios.post('/whisky/' + nextRecord + '.json', this.state.whisky)
                     .then(res => {
                         this.setState({ ...defaultData });
+                        console.log(res);
                     })
                     .catch(err => {
                         this.setState({ ...defaultData });

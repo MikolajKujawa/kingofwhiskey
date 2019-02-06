@@ -31,11 +31,6 @@
     cursor: pointer;
 }
 
-.Input {
-    width: 320px;
-    display: block;
-}
-
 .Pagination {
     display: inline-block;
     margin: 20px 0;

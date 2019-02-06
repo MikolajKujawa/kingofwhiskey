@@ -8,11 +8,13 @@ import axios from 'axios';
 
 axios.defaults.baseURL = "https://kingofwhiskey-27cda.firebaseio.com"; // Default Axios URL
 
-ReactDOM.render(
+const app = (
     <BrowserRouter>
         <App />
     </BrowserRouter>
-    , document.getElementById('root'));
+);
+
+ReactDOM.render( app, document.getElementById('root') );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
