@@ -12,9 +12,9 @@ class EditWhisky extends PureComponent {
     componentDidMount() {
         axios.get('/whisky.json')
             .then(res => {
-                let whisky=[];
-                let value=[];
-                let fbKey=[];
+                const whisky=[];
+                const value=[];
+                const fbKey=[];
                 let changeValue=[];
                 for (let key in res.data) {
                     for (let key2 in res.data[key]) {

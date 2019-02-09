@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import GameLogic from '../GameLogic/GameLogic';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
@@ -9,7 +9,7 @@ import EditWhisky from "../EditWhisky/EditWhisky";
 import About from '../../components/UI/Window/About/About';
 import Window from "../../components/UI/Window/Window";
 
-class Layout extends PureComponent {
+class Layout extends Component {
     state = {
         showSideDrawer: false,
         showModal: false
@@ -64,9 +64,9 @@ class Layout extends PureComponent {
                 { this.state.showModal ? aboutComponent : null }
                 <main className={classes.Content}>
                     <Switch>
-                        <Route path="/" exact component={GameLogic} />
                         <Route path="/addWhisky" component={NewWhisky} />
                         <Route path="/editWhisky" component={EditWhisky} />
+                        <Route path="/" exact component={GameLogic} />
                         <Route render={() => notFoundError} />
                     </Switch>
                 </main>
