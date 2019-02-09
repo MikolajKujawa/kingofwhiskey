@@ -1,12 +1,13 @@
 import React from 'react';
 import classes from '../Modal.css';
+
 import InputModal from './InputModal/InputModal';
 import Spinner from '../../Spinner/Spinner';
 
 const ModalGame = (props) => {
-    function capitalize(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+    const capitalize = (string) => (
+        string.charAt(0).toUpperCase() + string.slice(1)
+    );
 
     let Img;
     let inputs;
@@ -17,7 +18,12 @@ const ModalGame = (props) => {
     } else {
         Img = (
             <div className={classes.Img}>
-                <p><img onClick={props.next} src={props.state.whisky.img} alt="whisky_img"/></p>
+                <p><img
+                    style={{cursor: "pointer"}}
+                    src={props.state.whisky.img}
+                    alt="whisky_img" title="Change whisky"
+                    onClick={props.next}/>
+                </p>
             </div>
         );
 

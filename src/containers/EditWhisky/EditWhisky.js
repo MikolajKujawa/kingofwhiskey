@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import withErrorHnadler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
+import withErrorHandler from '../../hoc/withErrorHandler';
 import Modal from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 
 class EditWhisky extends PureComponent {
@@ -9,7 +9,17 @@ class EditWhisky extends PureComponent {
         loadingData: true,
     };
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.location.search!==this.props.location.search) {
+            this.fetchData();
+        }
+    }
+
     componentDidMount() {
+        this.fetchData();
+    }
+
+    fetchData = () => {
         axios.get('/whisky.json')
             .then(res => {
                 const whisky=[];
@@ -33,13 +43,13 @@ class EditWhisky extends PureComponent {
 
                 if (!currentPage) currentPage=1;
 
-		        let range = (currentPage-1)*5;
+                let range = (currentPage-1)*5;
 
                 this.setState({
-                    whisky: { ...whisky.splice(range, range+5) },
-                    value: { ...value.splice(range, range+5) },
-                    changeValue: { ...changeValue.splice(range, range+5) },
-                    fbKey: { ...fbKey.splice(range, range+5) },
+                    whisky: { ...whisky.slice(range, range+5) },
+                    value: { ...value.slice(range, range+5) },
+                    changeValue: { ...changeValue.slice(range, range+5) },
+                    fbKey: { ...fbKey.slice(range, range+5) },
                     pages: pages,
                     currentPage: currentPage,
                     loadingData: false
@@ -49,7 +59,7 @@ class EditWhisky extends PureComponent {
                 console.log(err);
                 return err;
             })
-    }
+    };
 
     changeWhiskyDataHandler = (event) => {
         let id=event.target.id;
@@ -103,4 +113,4 @@ class EditWhisky extends PureComponent {
     }
 }
 
-export default withErrorHnadler(EditWhisky, axios);
+export default withErrorHandler(EditWhisky, axios);

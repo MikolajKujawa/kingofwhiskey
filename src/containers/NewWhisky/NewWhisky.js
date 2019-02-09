@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import withErrorHnadler from '../../hoc/withErrorHandler';
+import withErrorHandler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
@@ -101,4 +101,4 @@ class NewWhisky extends PureComponent {
     }
 }
 
-export default withErrorHnadler(NewWhisky, axios);
+export default withErrorHandler(NewWhisky, axios);

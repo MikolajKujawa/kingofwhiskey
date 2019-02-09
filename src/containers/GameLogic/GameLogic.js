@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import withErrorHnadler from '../../hoc/withErrorHandler';
+import withErrorHandler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
 import Modal from '../../components/UI/Modal/ModalGame/ModalGame';
@@ -14,10 +14,12 @@ class GameLogic extends PureComponent {
     componentDidMount() {
         axios.get('/defaultValue.json')
             .then(res => {
+                const whisky = { ...res.data.whisky };
+                delete res.data.whisky.img;
                 defaultData={
                     correct: res.data.correct,
-                    whisky: res.data.whisky,
-                    value: res.data.value,
+                    whisky: whisky,
+                    value: res.data.whisky,
                     loading: res.data.loading,
                     loadingData: res.data.loadingData,
                     helpInfo: res.data.helpInfo
@@ -117,4 +119,4 @@ class GameLogic extends PureComponent {
     }
 }
 
-export default withErrorHnadler(GameLogic, axios);
+export default withErrorHandler(GameLogic, axios);
