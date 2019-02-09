@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import withErrorHandler from '../../hoc/withErrorHandler';
 import axios from 'axios';
 
+import withErrorHandler from '../../hoc/withErrorHandler';
 import Modal from '../../components/UI/Modal/ModalGame/ModalGame';
 
 let defaultData;

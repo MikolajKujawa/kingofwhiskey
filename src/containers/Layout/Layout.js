@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import GameLogic from '../GameLogic/GameLogic';
-import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
-import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import React, { Component, Suspense } from 'react';
 import classes from './Layout.css';
 import { Route, Switch } from "react-router-dom";
-import NewWhisky from "../NewWhisky/NewWhisky";
-import EditWhisky from "../EditWhisky/EditWhisky";
+
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import About from '../../components/UI/Window/About/About';
 import Window from "../../components/UI/Window/Window";
+
+const GameLogic = React.lazy(() => import('../GameLogic/GameLogic'));
+const NewWhisky = React.lazy(() => import('../NewWhisky/NewWhisky'));
+const EditWhisky = React.lazy(() => import('../EditWhisky/EditWhisky'));
 
 class Layout extends Component {
     state = {
@@ -64,9 +66,18 @@ class Layout extends Component {
                 { this.state.showModal ? aboutComponent : null }
                 <main className={classes.Content}>
                     <Switch>
-                        <Route path="/addWhisky" component={NewWhisky} />
-                        <Route path="/editWhisky" component={EditWhisky} />
-                        <Route path="/" exact component={GameLogic} />
+                        <Route path="/addWhisky" render={() =>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <NewWhisky />
+                            </Suspense>} />
+                        <Route path="/editWhisky" render={() =>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <EditWhisky />
+                            </Suspense>} />
+                        <Route path="/" exact render={() =>
+                            <Suspense fallback={<div>Loading...</div>}>
+                                <GameLogic />
+                            </Suspense>} />
                         <Route render={() => notFoundError} />
                     </Switch>
                 </main>

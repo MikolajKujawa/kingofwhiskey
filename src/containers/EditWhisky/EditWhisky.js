@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
@@ -41,7 +42,7 @@ class EditWhisky extends PureComponent {
                 const pages = Math.ceil(whisky.length/5);
                 let currentPage = this.props.location.search.substring(1);
 
-                if (!currentPage) currentPage=1;
+                if (!currentPage) currentPage="1";
 
                 let range = (currentPage-1)*5;
 
@@ -113,4 +114,4 @@ class EditWhisky extends PureComponent {
     }
 }
 
-export default withErrorHandler(EditWhisky, axios);
+export default withErrorHandler(withRouter(EditWhisky), axios);
