@@ -4,7 +4,7 @@ import classes from '../Modal.css';
 import InputModal from './InputModal/InputModal';
 import Spinner from '../../Spinner/Spinner';
 
-const Modal = (props) => {
+const modalAddWhisky = (props) => {
     const capitalize = (string) => (
         string.charAt(0).toUpperCase() + string.slice(1)
     );
@@ -54,4 +54,4 @@ const Modal = (props) => {
     );
 };
 
-export default Modal;
+export default modalAddWhisky;

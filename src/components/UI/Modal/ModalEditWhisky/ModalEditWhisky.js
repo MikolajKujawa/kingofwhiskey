@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import InputModal from './InputModal/InputModal';
 import Spinner from '../../Spinner/Spinner';
 
-const ModalGame = (props) => {
+const modalEditWhisky = (props) => {
     const capitalize = (string) => (
         string.charAt(0).toUpperCase() + string.slice(1)
     );
@@ -70,4 +70,4 @@ const ModalGame = (props) => {
     );
 };
 
-export default ModalGame;
+export default modalEditWhisky;

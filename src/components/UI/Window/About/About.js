@@ -1,10 +1,11 @@
 import React from 'react'
 import classes from './About.css';
-import Window from '../Window';
-import Logo from '../../../Logo/Logo';
 import GitHub from '../../../../assets/images/github.png';
 
-const About = (props) => (
+import Logo from '../../../Logo/Logo';
+import Window from '../Window';
+
+const about = (props) => (
     <Window
         show={props.show}
         modalToggle={props.modalToggle}>
@@ -36,4 +37,4 @@ const About = (props) => (
 
 );
 
-export default About;
+export default about;

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
-import Modal from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
+import ModalAddWhisky from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
 
 let defaultData;
 
@@ -92,7 +92,7 @@ class NewWhisky extends PureComponent {
     render() {
         return (
             <div>
-                <Modal
+                <ModalAddWhisky
                     state={this.state}
                     confirmData={this.confirmDataHandler}
                     updateData={this.updateNewWhiskyDataHandler} />

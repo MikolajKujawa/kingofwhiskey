@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from './Window.css';
+
 import Backdrop from '../Backdrop/Backdrop';
 
-const Window = (props) => {
+const window = (props) => {
     let attachedClasses = [classes.Modal, classes.Close];
 
     if (props.show) {
@@ -19,4 +20,4 @@ const Window = (props) => {
     )
 };
 
-export default Window;
+export default window;

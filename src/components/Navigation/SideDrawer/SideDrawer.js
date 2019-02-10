@@ -1,8 +1,9 @@
 import React from 'react';
+import classes from './SideDrawer.css';
+
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../../UI/Backdrop/Backdrop';
-import classes from './SideDrawer.css'
 
 const sideDrawer = (props) => {
     let attachedClasses = [classes.SideDrawer, classes.Close];
@@ -22,7 +23,7 @@ const sideDrawer = (props) => {
                 <nav>
                     <NavigationItems
                         toggleAbout={props.toggleAbout}
-                        activeAbout={props.activeAbout} />
+                        closed={props.closed} />
                 </nav>
             </div>
         </React.Fragment>

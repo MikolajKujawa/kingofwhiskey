@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
-import Modal from '../../components/UI/Modal/ModalGame/ModalGame';
+import ModalGame from '../../components/UI/Modal/ModalGame/ModalGame';
 
 let defaultData;
 
@@ -108,7 +108,7 @@ class GameLogic extends PureComponent {
     render() {
         return(
             <div>
-                <Modal
+                <ModalGame
                     viewHandler={this.viewCorrectDataHandler}
                     state={this.state}
                     next={this.randomWhiskyHandler}

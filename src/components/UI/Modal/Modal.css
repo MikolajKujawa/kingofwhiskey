@@ -32,7 +32,7 @@
 }
 
 .Pagination {
-    z-index: 100;
+    z-index: 1;
     position: fixed;
     bottom: 10px;
 }

@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
-import Modal from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
+import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 
 class EditWhisky extends PureComponent {
     state = {
@@ -105,7 +105,7 @@ class EditWhisky extends PureComponent {
     render() {
         return(
             <React.Fragment>
-                <Modal
+                <ModalEditWhisky
                     state={this.state}
                     change={this.changeWhiskyDataHandler}
                     edit={this.editWhiskyDataHandler} />
