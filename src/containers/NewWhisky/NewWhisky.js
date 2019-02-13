@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalAddWhisky from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
+import Validation from '../../components/ValidationSystem/ValidationSystem';
 
 let defaultData;
 
@@ -15,6 +16,7 @@ class NewWhisky extends PureComponent {
         axios.get('/defaultValue.json')
             .then(res => {
                 defaultData={
+                    validation: res.data.validation,
                     confirm: res.data.confirm,
                     whisky: res.data.whisky,
                     loading: res.data.loading,
@@ -52,27 +54,24 @@ class NewWhisky extends PureComponent {
 
     updateNewWhiskyDataHandler = (event) => {
         let newWhiskyDataCopy = { ...this.state.whisky };
+        let confirmStateCopy = { ...this.state.confirm };
 
-        if (event.target.value < 1) {
-            let confirmStateCopy = { ...this.state.confirm };
-            confirmStateCopy[event.target.name]=0;
-            this.setState({ confirm: confirmStateCopy });
-        } else {
-            newWhiskyDataCopy[event.target.name]=event.target.value;
-            this.setState({ whisky: newWhiskyDataCopy });
-        }
+        confirmStateCopy[event.target.name]=0;
+
+        newWhiskyDataCopy[event.target.name]=event.target.value;
+        this.setState({ whisky: newWhiskyDataCopy, confirm: confirmStateCopy });
     };
 
     confirmDataHandler = (event) => {
         let confirmStateCopy = { ...this.state.confirm };
 
-        if (this.state.whisky[event.target.name].length < 2) {
-            confirmStateCopy[event.target.name]=0;
-        } else {
+        if (Validation(this.state.validation[event.target.name], this.state.whisky[event.target.name])) {
             confirmStateCopy[event.target.name]=1;
+            this.setState({ confirm: confirmStateCopy });
+        } else {
+            confirmStateCopy[event.target.name]=0;
+            this.setState({ confirm: confirmStateCopy });
         }
-
-        this.setState({ confirm: confirmStateCopy });
 
         confirmStateCopy = Object.keys(confirmStateCopy)
             .map(key => {

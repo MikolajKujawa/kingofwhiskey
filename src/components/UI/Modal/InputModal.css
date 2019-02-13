@@ -14,6 +14,20 @@ input.Correct {
     cursor: not-allowed;
 }
 
+.flex-form button.Correct:disabled:hover {
+    background: rgba(0, 188, 91, 0.8);
+    border: 2px solid rgba(0, 188, 91, 1);
+}
+
+.flex-form button:disabled {
+    cursor: not-allowed;
+}
+
+.flex-form button:disabled:hover {
+    background: rgba(70, 28, 9, 0.7);
+    border: 2px solid rgba(96, 32, 11, 0.5);
+}
+
 .container {
     margin-bottom: 25px;
 }

@@ -14,6 +14,7 @@ const inputModal = (props) => {
             onChange={props.change}/>,
         <button
             key={props.whisky+"button"}
+            disabled={props.disabled}
             type="button"
             className={props.changeValue ? classes.Change : null}
             name={props.name}

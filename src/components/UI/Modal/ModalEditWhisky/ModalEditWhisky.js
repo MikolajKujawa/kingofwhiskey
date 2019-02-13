@@ -38,6 +38,7 @@ const modalEditWhisky = (props) => {
                                     value={props.state.value[key][key2]}
                                     name={key2} inputName={capitalize(key2)}
                                     id={key}
+                                    disabled={!props.state.changeValue[key][key2]}
                                     change={props.change}
                                     edit={props.edit} />
                             );

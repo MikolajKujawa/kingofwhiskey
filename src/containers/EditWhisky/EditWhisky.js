@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
+import Validation from '../../components/ValidationSystem/ValidationSystem';
 
 class EditWhisky extends PureComponent {
     state = {
@@ -11,7 +12,7 @@ class EditWhisky extends PureComponent {
     };
 
     componentDidUpdate(prevProps) {
-        if (prevProps.location.search!==this.props.location.search) {
+        if (prevProps.location.search !== this.props.location.search) {
             this.fetchData();
         }
     }
@@ -46,15 +47,23 @@ class EditWhisky extends PureComponent {
 
                 let range = (currentPage-1)*5;
 
-                this.setState({
-                    whisky: { ...whisky.slice(range, range+5) },
-                    value: { ...value.slice(range, range+5) },
-                    changeValue: { ...changeValue.slice(range, range+5) },
-                    fbKey: { ...fbKey.slice(range, range+5) },
-                    pages: pages,
-                    currentPage: currentPage,
-                    loadingData: false
-                })
+                axios.get('/defaultValue.json')
+                    .then(res => {
+                        this.setState({
+                            validation: res.data.validation,
+                            whisky: { ...whisky.slice(range, range+5) },
+                            value: { ...value.slice(range, range+5) },
+                            changeValue: { ...changeValue.slice(range, range+5) },
+                            fbKey: { ...fbKey.slice(range, range+5) },
+                            pages: pages,
+                            currentPage: currentPage,
+                            loadingData: false
+                        })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        return err;
+                    })
             })
             .catch(err => {
                 console.log(err);
@@ -70,7 +79,8 @@ class EditWhisky extends PureComponent {
         const whiskyDefaultValue = this.state.whisky[id][inputName];
 
         changeValueCopy[id][inputName] =
-            !(event.target.value === whiskyDefaultValue || event.target.value.length < 2);
+            (event.target.value !== whiskyDefaultValue &&
+            Validation(this.state.validation[inputName], event.target.value));
 
         valueCopy[id][inputName]=event.target.value;
 
@@ -84,7 +94,7 @@ class EditWhisky extends PureComponent {
         let whiskyCopy = { ...this.state.whisky };
         let changeValueCopy = { ...this.state.changeValue };
 
-        if (this.state.value[id][inputName].length > 2) {
+        if (changeValueCopy[id][inputName]) {
             whiskyCopy[id][inputName]=this.state.value[id][inputName];
             axios.put('/whisky/'+id+'/'+fbKey+'.json', whiskyCopy[id])
                 .then(res => {
