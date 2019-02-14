@@ -4,7 +4,11 @@
     <bookmark url="file://$PROJECT_DIR$/src/App.js" line="19" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c6d74e8-00c4-43f4-a4fe-e991538cb014" name="Default Changelist" comment="" />
+    <list default="true" id="2c6d74e8-00c4-43f4-a4fe-e991538cb014" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -90,8 +94,8 @@
         <option value="$PROJECT_DIR$/src/components/UI/Modal/InputModal.css" />
         <option value="$PROJECT_DIR$/src/components/UI/Modal/ModalAddWhisky/InputModal/InputModal.js" />
         <option value="$PROJECT_DIR$/src/components/UI/Modal/ModalAddWhisky/ModalAddWhisky.js" />
-        <option value="$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js" />
         <option value="$PROJECT_DIR$/src/containers/NewWhisky/NewWhisky.js" />
+        <option value="$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/package-lock.json" />
       </list>
@@ -108,6 +112,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -115,11 +120,15 @@
               <item name="kingofwhiskey" type="b2602c69:ProjectViewProjectNode" />
               <item name="kingofwhiskey" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="kingofwhiskey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kingofwhiskey" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,11 +197,12 @@
       <workItem from="1549984383028" duration="1592000" />
       <workItem from="1550049501968" duration="219000" />
       <workItem from="1550079190225" duration="6575000" />
+      <workItem from="1550157729495" duration="219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161833000" />
+    <option name="totallyTimeSpent" value="162098000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1020" extended-state="6" />
@@ -241,13 +251,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/UI/Backdrop/Backdrop.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/UI/Spinner/Spinner.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="633">
@@ -539,13 +542,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/ValidationInput/ValidationInput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/ValidationInput/ValidationInput.js" />
     <entry file="file://$PROJECT_DIR$/src/components/UI/Modal/ModalEditWhisky/InputModal/InputModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -603,13 +600,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/NewWhisky/NewWhisky.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -617,6 +607,13 @@
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ValidationSystem/ValidationSystem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="36" lean-forward="true" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -631,6 +628,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>

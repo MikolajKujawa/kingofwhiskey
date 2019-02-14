@@ -13,8 +13,8 @@ const validationSystem = (rules, value) => {
         isValid = value.length <= rules.maxLength;
     }
 
-    if(rules.type && isValid) {
-        isValid = isNaN(value) !== rules.type;
+    if(rules.number && isValid) {
+        isValid = isNaN(value) !== rules.number;
     }
 
     return isValid;
