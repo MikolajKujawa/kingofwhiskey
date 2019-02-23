@@ -9,14 +9,12 @@ const modalAddWhisky = (props) => {
         string.charAt(0).toUpperCase() + string.slice(1)
     );
 
-    let Img;
+    let Img=null;
     let inputs;
 
     if (props.state.loadingData) {
-        Img=null;
         inputs=<Spinner />;
     } else {
-        Img=null;
         if (props.state.confirm.img) {
             Img = (
                 <div className={classes.Img}>

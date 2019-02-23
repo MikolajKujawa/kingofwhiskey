@@ -19,7 +19,7 @@ const modalEditWhisky = (props) => {
         const activePage = (path) => {
             return props.state.currentPage === path.toString();
         };
-            
+
         inputs = Object.keys(props.state.whisky)
             .map(key => {
                 return [
@@ -45,6 +45,7 @@ const modalEditWhisky = (props) => {
                         })
                 ]
             });
+
         nextPage=[];
         let page=0;
         for (let i=0; i<props.state.pages; i++) {

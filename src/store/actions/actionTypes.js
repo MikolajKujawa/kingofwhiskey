@@ -1,0 +1,7 @@
+export const DEFAULT_VALUE_GAME = 'DEFAULT_VALUE_GAME';
+export const LOADING_DATA = 'LOADING_DATA';
+export const RANDOM_WHISKY = 'RANDOM_WHISKY';
+export const VIEW_CORRECT_DATA = 'VIEW_CORRECT_DATA';
+export const TEST_DATA = 'TEST_DATA';
+
+export const FETCH_DATA_FAIL = 'FETCH_DATA_FAIL';

@@ -9,11 +9,10 @@ const modalGame = (props) => {
         string.charAt(0).toUpperCase() + string.slice(1)
     );
 
-    let Img;
+    let Img=null;
     let inputs;
 
     if (props.state.loadingData) {
-        Img=null;
         inputs=<Spinner />;
     } else {
         Img = (
@@ -29,22 +28,22 @@ const modalGame = (props) => {
 
         if (props.state.loading) {
             Img = <Spinner />
+        } else {
+            inputs = Object.keys(props.state.value)
+                .map(key => {
+                    return (
+                        <InputModal
+                            key={key}
+                            help={props.state.helpInfo[key]}
+                            correct={props.state.correct[key]}
+                            value={props.state.value[key]}
+                            whisky={props.state.whisky[key]}
+                            name={key} inputName={capitalize(key)}
+                            change={props.change}
+                            viewHandler={props.viewHandler} />
+                    );
+                });
         }
-
-        inputs = Object.keys(props.state.value)
-            .map(key => {
-                return (
-                    <InputModal
-                        key={key}
-                        help={props.state.helpInfo[key]}
-                        correct={props.state.correct[key]}
-                        value={props.state.value[key]}
-                        whisky={props.state.whisky[key]}
-                        name={key} inputName={capitalize(key)}
-                        change={props.change}
-                        viewHandler={props.viewHandler} />
-                );
-            });
     }
 
     return (
