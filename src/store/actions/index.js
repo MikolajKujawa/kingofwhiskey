@@ -2,6 +2,18 @@ export {
     loadRandomWhisky,
     viewCorrectData,
     testData,
-    loadDefaultValue,
-    loadingData,
+    onLoadNewWhisky,
 } from './game';
+
+export {
+    loadDefaultValueNW,
+    putNewWhisky,
+    confirmData,
+    updateNewWhiskyData
+} from './newWhisky';
+
+export {
+    fetchData,
+    editWhiskyData,
+    changeWhiskyData
+} from './editWhisky';

@@ -24,23 +24,22 @@ export const viewCorrectData = (name) => {
 
 export const testData = (name, value) => {
     return {
-        type: actionTypes.TEST_DATA,
+        type: actionTypes.TESTING_DATA,
         name: name,
         value: value
     };
 };
 
-export const loadingData = (status, statusData) => {
+export const loading = (status) => {
     return {
-        type: actionTypes.LOADING_DATA,
-        status: status,
-        statusData: statusData
+        type: actionTypes.LOADING_GAME,
+        status: status
     };
 };
 
 export const fetchDataFailed = () => {
     return {
-        type: actionTypes.FETCH_DATA_FAIL
+        type: actionTypes.FETCH_DATA_FAIL_GAME
     };
 };
 
@@ -68,9 +67,9 @@ export const loadRandomWhisky = () => {
     }
 };
 
-export const loadDefaultValue = () => {
+export const onLoadNewWhisky = () => {
     return dispatch => {
-        dispatch(loadingData(true, true));
+        dispatch(loading(true));
         axios.get('/defaultValue.json')
             .then(res => {
                 const whisky = { ...res.data.whisky };
@@ -79,8 +78,6 @@ export const loadDefaultValue = () => {
                     correct: res.data.correct,
                     whisky: whisky,
                     value: res.data.whisky,
-                    loading: res.data.loading,
-                    loadingData: res.data.loadingData,
                     helpInfo: res.data.helpInfo
                 };
                 dispatch(setDefaultValue(defaultData));

@@ -13,7 +13,7 @@ const modalEditWhisky = (props) => {
     let inputs;
     let nextPage=null;
 
-    if (props.state.loadingData) {
+    if (props.state.loading) {
         inputs=<Spinner />;
     } else {
         const activePage = (path) => {

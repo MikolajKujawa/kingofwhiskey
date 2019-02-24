@@ -9,7 +9,7 @@ import * as actions from '../../store/actions/index';
 
 class GameLogic extends PureComponent {
     componentDidMount() {
-        this.props.onDefaultValue();
+        this.props.onLoadNewWhisky();
     };
 
     componentDidUpdate() {
@@ -27,7 +27,7 @@ class GameLogic extends PureComponent {
 
         if (correctSum===correctCopy.length && !this.props.state.loading) {
             setTimeout(() => {
-                this.props.onDefaultValue();
+                this.props.onLoadNewWhisky();
             },1000)
         }
     };
@@ -38,7 +38,7 @@ class GameLogic extends PureComponent {
                 <ModalGame
                     viewHandler={(event) => this.props.onViewCorrectData(event.target.name)}
                     state={this.props.state}
-                    next={this.props.onDefaultValue}
+                    next={this.props.onLoadNewWhisky}
                     change={(event) => this.props.onTestData(event.target.name, event.target.value)}
                 />
             </div>
@@ -54,7 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onDefaultValue: () => dispatch(actions.loadDefaultValue()),
+        onLoadNewWhisky: () => dispatch(actions.onLoadNewWhisky()),
         onViewCorrectData: (name) => dispatch(actions.viewCorrectData(name)),
         onTestData: (name, value) => dispatch(actions.testData(name, value)),
     };

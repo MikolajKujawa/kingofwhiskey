@@ -5,72 +5,23 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalAddWhisky from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
 
-let defaultData;
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 class NewWhisky extends PureComponent {
-    state = {
-        loadingData: true
-    };
-
     componentDidMount() {
-        axios.get('/defaultValue.json')
-            .then(res => {
-                defaultData={
-                    validation: res.data.validation,
-                    confirm: res.data.confirm,
-                    whisky: res.data.whisky,
-                    loading: res.data.loading,
-                    loadingData: res.data.loadingData
-                };
-                this.setState(defaultData);
-            })
-            .catch(err => {
-                console.log(err);
-                return err;
-            })
-    };
-
-    newWhiskyHandler = () => {
-        this.setState({ loading: true });
-
-        axios.get('/whisky.json')
-            .then(res => {
-                const nextRecord = res.data.length;
-                axios.post('/whisky/' + nextRecord + '.json', this.state.whisky)
-                    .then(res => {
-                        this.setState({ ...defaultData });
-                        console.log(res);
-                    })
-                    .catch(err => {
-                        this.setState({ ...defaultData });
-                        console.log(err);
-                    })
-            })
-            .catch(err => {
-                this.setState({ loading: false });
-                console.log(err);
-            })
-    };
-
-    updateNewWhiskyDataHandler = (event) => {
-        let newWhiskyDataCopy = { ...this.state.whisky };
-        let confirmStateCopy = { ...this.state.confirm };
-
-        confirmStateCopy[event.target.name]=0;
-
-        newWhiskyDataCopy[event.target.name]=event.target.value;
-        this.setState({ whisky: newWhiskyDataCopy, confirm: confirmStateCopy });
+        this.props.onDefaultValue();
     };
 
     confirmDataHandler = (event) => {
-        let confirmStateCopy = { ...this.state.confirm };
+        let confirmStateCopy = { ...this.props.state.confirm };
 
-        if (Validation(this.state.validation[event.target.name], this.state.whisky[event.target.name])) {
+        if (Validation(this.props.state.validation[event.target.name], this.props.state.whisky[event.target.name])) {
             confirmStateCopy[event.target.name]=1;
-            this.setState({ confirm: confirmStateCopy });
+            this.props.onConfirmData(confirmStateCopy);
         } else {
             confirmStateCopy[event.target.name]=0;
-            this.setState({ confirm: confirmStateCopy });
+            this.props.onConfirmData(confirmStateCopy);
         }
 
         confirmStateCopy = Object.keys(confirmStateCopy)
@@ -83,8 +34,8 @@ class NewWhisky extends PureComponent {
                 return confirmStateCopy + el;
             }, 0);
 
-        if (confirmSum===confirmStateCopy.length) {
-            this.newWhiskyHandler();
+        if (confirmSum===confirmStateCopy.length && confirmSum>1) {
+            this.props.onAddNewWhisky(this.props.state.whisky);
         }
     };
 
@@ -92,12 +43,27 @@ class NewWhisky extends PureComponent {
         return (
             <div>
                 <ModalAddWhisky
-                    state={this.state}
+                    state={this.props.state}
                     confirmData={this.confirmDataHandler}
-                    updateData={this.updateNewWhiskyDataHandler} />
+                    updateData={(event) => this.props.onUpdateNewWhiskyData(event.target.name, event.target.value)} />
             </div>
         );
     }
 }
 
-export default withErrorHandler(NewWhisky, axios);
+const mapStateToProps = state => {
+    return {
+        state: state.newWhisky,
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onDefaultValue: () => dispatch(actions.loadDefaultValueNW()),
+        onAddNewWhisky: (newWhisky) => dispatch(actions.putNewWhisky(newWhisky)),
+        onUpdateNewWhiskyData: (name, value) => dispatch(actions.updateNewWhiskyData(name, value)),
+        onConfirmData: (confirm) => dispatch(actions.confirmData(confirm))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(NewWhisky, axios));

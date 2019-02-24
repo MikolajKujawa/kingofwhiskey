@@ -12,7 +12,7 @@ const modalAddWhisky = (props) => {
     let Img=null;
     let inputs;
 
-    if (props.state.loadingData) {
+    if (props.state.loading) {
         inputs=<Spinner />;
     } else {
         if (props.state.confirm.img) {
@@ -22,22 +22,17 @@ const modalAddWhisky = (props) => {
                 </div>
             );
         }
-
-        if (props.state.loading) {
-            inputs = <Spinner />
-        } else {
-            inputs = Object.keys(props.state.whisky)
-                .map(key => {
-                    return (
-                        <InputModal
-                            key={key}
-                            correct={props.state.confirm[key]}
-                            name={key} inputName={capitalize(key)}
-                            updateData={props.updateData}
-                            confirmData={props.confirmData} />
-                    );
-                });
-        }
+        inputs = Object.keys(props.state.whisky)
+            .map(key => {
+                return (
+                    <InputModal
+                        key={key}
+                        correct={props.state.confirm[key]}
+                        name={key} inputName={capitalize(key)}
+                        updateData={props.updateData}
+                        confirmData={props.confirmData} />
+                );
+            });
     }
 
     return (

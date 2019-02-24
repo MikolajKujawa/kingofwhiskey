@@ -1,7 +1,21 @@
+// Game
 export const DEFAULT_VALUE_GAME = 'DEFAULT_VALUE_GAME';
-export const LOADING_DATA = 'LOADING_DATA';
 export const RANDOM_WHISKY = 'RANDOM_WHISKY';
 export const VIEW_CORRECT_DATA = 'VIEW_CORRECT_DATA';
-export const TEST_DATA = 'TEST_DATA';
+export const TESTING_DATA = 'TESTING_DATA';
+export const LOADING_GAME = 'LOADING_GAME';
+export const FETCH_DATA_FAIL_GAME = 'FETCH_DATA_FAIL_GAME';
 
-export const FETCH_DATA_FAIL = 'FETCH_DATA_FAIL';
+// EditWhisky
+export const LOAD_FETCH_DATA = 'LOAD_FETCH_DATA';
+export const CHANGE_WHISKY_DATA = 'CHANGE_WHISKY_DATA';
+export const EDIT_WHISKY_DATA = 'EDIT_WHISKY_DATA';
+export const LOADING_EDIT = 'LOADING_EDIT';
+export const FETCH_DATA_FAIL_EDIT = 'FETCH_DATA_FAIL_EDIT';
+
+// EditWhisky
+export const DEFAULT_VALUE_NEW = 'DEFAULT_VALUE_NEW';
+export const UPDATE_NEW_WHISKY = 'UPDATE_NEW_WHISKY';
+export const CONFIRM_DATA = 'CONFIRM_DATA';
+export const LOADING_NEW = 'LOADING_NEW';
+export const FETCH_DATA_FAIL_NEW = 'FETCH_DATA_FAIL_NEW';
