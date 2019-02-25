@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
+import { returnError, updateObject } from '../utility';
 
 const initState = {
     loading: true
@@ -11,7 +11,7 @@ const editWhisky = (state = initState, action) => {
         case actionTypes.CHANGE_WHISKY_DATA: return updateObject(state, { value: action.value });
         case actionTypes.EDIT_WHISKY_DATA: return updateObject(state, { whisky: action.whisky, changeValue: action.changeValue });
         case actionTypes.LOADING_EDIT: return updateObject(state, { loading: action.status });
-        case actionTypes.FETCH_DATA_FAIL_EDIT: return updateObject(state, { loading: false });
+        case actionTypes.FETCH_DATA_FAIL_EDIT: return returnError(state, action.error);
         default: return state;
     }
 };

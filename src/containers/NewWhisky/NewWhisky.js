@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
+// Components
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalAddWhisky from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
-
-import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
 
 class NewWhisky extends PureComponent {
     componentDidMount() {

@@ -2,11 +2,13 @@ import React, { Component, Suspense } from 'react';
 import classes from './Layout.css';
 import { Route, Switch } from "react-router-dom";
 
+// Components
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import About from '../../components/UI/Window/About/About';
 import Window from "../../components/UI/Window/Window";
 
+// Lazy containers
 const GameLogic = React.lazy(() => import('../GameLogic/GameLogic'));
 const NewWhisky = React.lazy(() => import('../NewWhisky/NewWhisky'));
 const EditWhisky = React.lazy(() => import('../EditWhisky/EditWhisky'));

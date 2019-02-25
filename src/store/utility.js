@@ -4,3 +4,11 @@ export const updateObject = (oldObject, newProps) => {
         ...newProps
     };
 };
+
+export const returnError = (oldState, error) => {
+    console.log(error);
+    return {
+        ...oldState,
+        loading: false
+    };
+};

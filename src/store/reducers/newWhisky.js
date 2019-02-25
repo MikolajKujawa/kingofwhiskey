@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
+import { returnError, updateObject } from '../utility';
 
 const initState = {
     loading: true
@@ -24,7 +24,7 @@ const newWhisky = (state = initState, action) => {
         case actionTypes.UPDATE_NEW_WHISKY: return updateNewWhisky(state, action);
         case actionTypes.CONFIRM_DATA: return updateObject(state, { confirm: action.confirm });
         case actionTypes.LOADING_NEW: return updateObject(state, { loading: action.status });
-        case actionTypes.FETCH_DATA_FAIL_NEW: return updateObject(state, { loading: false });
+        case actionTypes.FETCH_DATA_FAIL_NEW: return returnError(state, action.error);
         default: return state;
     }
 };

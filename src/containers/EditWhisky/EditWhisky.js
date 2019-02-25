@@ -1,15 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
+// Components
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
 
-import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
+class EditWhisky extends PureComponent {
+    state = {
+        changePage: false
+    };
 
-class EditWhisky extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.location.search !== this.props.location.search) {
             this.props.onLoadFetchData(this.props.location.search.substring(1));
@@ -19,6 +25,12 @@ class EditWhisky extends Component {
     componentDidMount() {
         this.props.onLoadFetchData(this.props.location.search.substring(1));
     }
+
+    changePageActionHandler = () => {
+        this.setState({
+            changePage: !this.state.changePage
+        });
+    };
 
     changeWhiskyDataHandler = (event) => {
         let id=event.target.id;
@@ -49,6 +61,7 @@ class EditWhisky extends Component {
                 .then(res => {
                     changeValueCopy[id][inputName]=false;
                     this.props.onEditWhiskyData(whiskyCopy, changeValueCopy);
+                    return res;
                 })
                 .catch(err => {
                     console.log(err);
@@ -62,6 +75,7 @@ class EditWhisky extends Component {
             <React.Fragment>
                 <ModalEditWhisky
                     state={this.props.state}
+                    changePage={this.changePageActionHandler}
                     change={this.changeWhiskyDataHandler}
                     edit={this.editWhiskyDataHandler} />
             </React.Fragment>

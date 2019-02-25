@@ -15,6 +15,7 @@ images.
 - React routing 
 - Add new whisky module  
 - Edit and views whisky module 
+- Redux system
 - Mobile support 
 - API powered by Firebase
 
@@ -23,6 +24,9 @@ images.
   
 - React <i>16.7</i>  
 - React router <i>4.3.1+</i>  
+- React Redux <i>6.0.1</i>  
+- Redux <i>4.0.1</i>  
+- Redux Thunk <i>2.3.0+</i>  
 - Firebase 
 - Axios <i>18.0+</i>   
 - Babel <i>7.0</i>  

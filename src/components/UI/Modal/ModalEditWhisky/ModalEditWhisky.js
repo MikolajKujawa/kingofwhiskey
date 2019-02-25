@@ -51,11 +51,13 @@ const modalEditWhisky = (props) => {
         for (let i=0; i<props.state.pages; i++) {
             page++;
             nextPage.push(
-                <NavLink
-                    key={page}
-                    className={activePage(page) ? classes.Active : null}
-                    to={'?'+page}>{page}
-                </NavLink>
+                <span onClick={props.changePage}>
+                    <NavLink
+                        key={page}
+                        className={activePage(page) ? classes.Active : null}
+                        to={'?'+page}>{page}
+                    </NavLink>
+                </span>
             );
         }
     }

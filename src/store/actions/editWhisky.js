@@ -30,9 +30,10 @@ export const loading = (status) => {
     };
 };
 
-export const fetchDataFailed = () => {
+export const fetchDataFailed = (err) => {
     return {
-        type: actionTypes.FETCH_DATA_FAIL_EDIT
+        type: actionTypes.FETCH_DATA_FAIL_EDIT,
+        error: err
     };
 };
 
@@ -76,13 +77,11 @@ export const fetchData = (page) => {
                         dispatch(loadFetchData(data));
                     })
                     .catch(err => {
-                        console.log(err);
-                        dispatch(fetchDataFailed());
+                        dispatch(fetchDataFailed(err));
                     })
             })
             .catch(err => {
-                console.log(err);
-                dispatch(fetchDataFailed());
+                dispatch(fetchDataFailed(err));
             })
     };
 };

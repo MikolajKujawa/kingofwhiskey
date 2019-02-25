@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../utility';
+import { returnError, updateObject } from '../utility';
 
 const initState = {
     loading: true
@@ -40,7 +40,7 @@ const game = (state = initState, action) => {
         case actionTypes.VIEW_CORRECT_DATA: return viewCorrectData(state, action);
         case actionTypes.TESTING_DATA: return testingData(state, action);
         case actionTypes.LOADING_GAME: return updateObject(state, { loading: action.status });
-        case actionTypes.FETCH_DATA_FAIL_GAME: return updateObject(state, { loading: false });
+        case actionTypes.FETCH_DATA_FAIL_GAME: return returnError(state, action.error);
         default: return state;
     }
 };

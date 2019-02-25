@@ -37,9 +37,10 @@ export const loading = (status) => {
     };
 };
 
-export const fetchDataFailed = () => {
+export const fetchDataFailed = (err) => {
     return {
-        type: actionTypes.FETCH_DATA_FAIL_GAME
+        type: actionTypes.FETCH_DATA_FAIL_GAME,
+        error: err
     };
 };
 
@@ -58,11 +59,11 @@ export const loadRandomWhisky = () => {
                         dispatch(setRandomWhisky(whisky));
                     })
                     .catch(err => {
-                        dispatch(fetchDataFailed());
+                        dispatch(fetchDataFailed(err));
                     })
             })
             .catch(err => {
-                dispatch(fetchDataFailed());
+                dispatch(fetchDataFailed(err));
             })
     }
 };
@@ -84,7 +85,7 @@ export const onLoadNewWhisky = () => {
                 dispatch(loadRandomWhisky());
             })
             .catch(err => {
-                dispatch(fetchDataFailed());
+                dispatch(fetchDataFailed(err));
             })
     };
 };

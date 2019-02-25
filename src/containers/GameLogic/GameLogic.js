@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react';
 import axios from 'axios';
 
-import withErrorHandler from '../../hoc/withErrorHandler';
-import ModalGame from '../../components/UI/Modal/ModalGame/ModalGame';
-
+// Redux
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
+
+// Components
+import withErrorHandler from '../../hoc/withErrorHandler';
+import ModalGame from '../../components/UI/Modal/ModalGame/ModalGame';
 
 class GameLogic extends PureComponent {
     componentDidMount() {
@@ -48,7 +50,7 @@ class GameLogic extends PureComponent {
 
 const mapStateToProps = state => {
     return {
-        state: state.game,
+        state: state.game
     };
 };
 

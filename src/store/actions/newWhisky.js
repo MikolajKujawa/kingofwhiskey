@@ -30,9 +30,10 @@ export const loading = (status) => {
     };
 };
 
-export const fetchDataFailed = () => {
+export const fetchDataFailed = (err) => {
     return {
-        type: actionTypes.FETCH_DATA_FAIL_NEW
+        type: actionTypes.FETCH_DATA_FAIL_NEW,
+        error: err
     };
 };
 
@@ -45,14 +46,15 @@ export const putNewWhisky = (newWhisky) => {
                 axios.post('/whisky/' + nextRecord + '.json', newWhisky)
                     .then(res => {
                         dispatch(loadDefaultValueNW());
+                        return res;
                     })
                     .catch(err => {
                         dispatch(loadDefaultValueNW());
-                        dispatch(fetchDataFailed());
+                        dispatch(fetchDataFailed(err));
                     })
             })
             .catch(err => {
-                dispatch(fetchDataFailed());
+                dispatch(fetchDataFailed(err));
             })
     };
 };
@@ -72,7 +74,7 @@ export const loadDefaultValueNW = () => {
                 dispatch(setDefaultValue(defaultData));
             })
             .catch(err => {
-                dispatch(fetchDataFailed());
+                dispatch(fetchDataFailed(err));
             })
     };
 };
