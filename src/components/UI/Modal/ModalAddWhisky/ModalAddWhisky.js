@@ -9,14 +9,12 @@ const modalAddWhisky = (props) => {
         string.charAt(0).toUpperCase() + string.slice(1)
     );
 
-    let Img;
+    let Img=null;
     let inputs;
 
-    if (props.state.loadingData) {
-        Img=null;
+    if (props.state.loading) {
         inputs=<Spinner />;
     } else {
-        Img=null;
         if (props.state.confirm.img) {
             Img = (
                 <div className={classes.Img}>
@@ -24,22 +22,17 @@ const modalAddWhisky = (props) => {
                 </div>
             );
         }
-
-        if (props.state.loading) {
-            inputs = <Spinner />
-        } else {
-            inputs = Object.keys(props.state.whisky)
-                .map(key => {
-                    return (
-                        <InputModal
-                            key={key}
-                            correct={props.state.confirm[key]}
-                            name={key} inputName={capitalize(key)}
-                            updateData={props.updateData}
-                            confirmData={props.confirmData} />
-                    );
-                });
-        }
+        inputs = Object.keys(props.state.whisky)
+            .map(key => {
+                return (
+                    <InputModal
+                        key={key}
+                        correct={props.state.confirm[key]}
+                        name={key} inputName={capitalize(key)}
+                        updateData={props.updateData}
+                        confirmData={props.confirmData} />
+                );
+            });
     }
 
     return (

@@ -2,108 +2,66 @@ import React, { PureComponent } from 'react';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
+// Redux
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
+// Components
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
 
 class EditWhisky extends PureComponent {
     state = {
-        loadingData: true,
+        changePage: false
     };
 
     componentDidUpdate(prevProps) {
         if (prevProps.location.search !== this.props.location.search) {
-            this.fetchData();
+            this.props.onLoadFetchData(this.props.location.search.substring(1));
         }
     }
 
     componentDidMount() {
-        this.fetchData();
+        this.props.onLoadFetchData(this.props.location.search.substring(1));
     }
 
-    fetchData = () => {
-        axios.get('/whisky.json')
-            .then(res => {
-                const whisky=[];
-                const value=[];
-                const fbKey=[];
-                let changeValue=[];
-                for (let key in res.data) {
-                    for (let key2 in res.data[key]) {
-                        whisky.push({ ...res.data[key][key2] });
-                        value.push({ ...res.data[key][key2] });
-                        changeValue.push({ ...res.data[key][key2] });
-                        fbKey.push({ key2 });
-                        for (let key3 in res.data[key][key2]) {
-                            changeValue[key][key3]=false;
-                        }
-                    }
-                }
-
-                const pages = Math.ceil(whisky.length/5);
-                let currentPage = this.props.location.search.substring(1);
-
-                if (!currentPage) currentPage="1";
-
-                let range = (currentPage-1)*5;
-
-                axios.get('/defaultValue.json')
-                    .then(res => {
-                        this.setState({
-                            validation: res.data.validation,
-                            whisky: { ...whisky.slice(range, range+5) },
-                            value: { ...value.slice(range, range+5) },
-                            changeValue: { ...changeValue.slice(range, range+5) },
-                            fbKey: { ...fbKey.slice(range, range+5) },
-                            pages: pages,
-                            currentPage: currentPage,
-                            loadingData: false
-                        })
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        return err;
-                    })
-            })
-            .catch(err => {
-                console.log(err);
-                return err;
-            })
+    changePageActionHandler = () => {
+        this.setState({
+            changePage: !this.state.changePage
+        });
     };
 
     changeWhiskyDataHandler = (event) => {
         let id=event.target.id;
         let inputName=event.target.name;
-        let valueCopy = { ...this.state.value };
-        let changeValueCopy = { ...this.state.changeValue };
-        const whiskyDefaultValue = this.state.whisky[id][inputName];
+        let valueCopy = { ...this.props.state.value };
+        let changeValueCopy = { ...this.props.state.changeValue };
+        const whiskyDefaultValue = this.props.state.whisky[id][inputName];
 
         changeValueCopy[id][inputName] =
             (event.target.value !== whiskyDefaultValue &&
-            Validation(this.state.validation[inputName], event.target.value));
+            Validation(this.props.state.validation[inputName], event.target.value));
 
         valueCopy[id][inputName]=event.target.value;
 
-        this.setState({ value: valueCopy })
+        this.props.onChangeWhiskyData(valueCopy);
     };
 
     editWhiskyDataHandler = (event) => {
         let id=event.target.id;
         let inputName=event.target.name;
-        let fbKey = this.state.fbKey[id]['key2'];
-        let whiskyCopy = { ...this.state.whisky };
-        let changeValueCopy = { ...this.state.changeValue };
+        let fbKey = this.props.state.fbKey[id]['key2'];
+        let whiskyCopy = { ...this.props.state.whisky };
+        let changeValueCopy = { ...this.props.state.changeValue };
 
         if (changeValueCopy[id][inputName]) {
-            whiskyCopy[id][inputName]=this.state.value[id][inputName];
+            whiskyCopy[id][inputName]=this.props.state.value[id][inputName];
             axios.put('/whisky/'+id+'/'+fbKey+'.json', whiskyCopy[id])
                 .then(res => {
                     changeValueCopy[id][inputName]=false;
-                    this.setState({
-                        whisky: whiskyCopy,
-                        changeValue: changeValueCopy
-                    });
-                    console.log(res);
+                    this.props.onEditWhiskyData(whiskyCopy, changeValueCopy);
+                    return res;
                 })
                 .catch(err => {
                     console.log(err);
@@ -116,7 +74,8 @@ class EditWhisky extends PureComponent {
         return(
             <React.Fragment>
                 <ModalEditWhisky
-                    state={this.state}
+                    state={this.props.state}
+                    changePage={this.changePageActionHandler}
                     change={this.changeWhiskyDataHandler}
                     edit={this.editWhiskyDataHandler} />
             </React.Fragment>
@@ -124,4 +83,18 @@ class EditWhisky extends PureComponent {
     }
 }
 
-export default withErrorHandler(withRouter(EditWhisky), axios);
+const mapStateToProps = (state) => {
+    return {
+        state: state.editWhisky
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLoadFetchData: (page) => dispatch(actions.fetchData(page)),
+        onChangeWhiskyData: (value) => dispatch(actions.changeWhiskyData(value)),
+        onEditWhiskyData: (whisky, changeValue) => dispatch(actions.editWhiskyData(whisky, changeValue))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(withRouter(EditWhisky), axios));

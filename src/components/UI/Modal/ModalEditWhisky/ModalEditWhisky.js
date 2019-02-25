@@ -13,13 +13,13 @@ const modalEditWhisky = (props) => {
     let inputs;
     let nextPage=null;
 
-    if (props.state.loadingData) {
+    if (props.state.loading) {
         inputs=<Spinner />;
     } else {
         const activePage = (path) => {
             return props.state.currentPage === path.toString();
         };
-            
+
         inputs = Object.keys(props.state.whisky)
             .map(key => {
                 return [
@@ -45,16 +45,19 @@ const modalEditWhisky = (props) => {
                         })
                 ]
             });
+
         nextPage=[];
         let page=0;
         for (let i=0; i<props.state.pages; i++) {
             page++;
             nextPage.push(
-                <NavLink
-                    key={page}
-                    className={activePage(page) ? classes.Active : null}
-                    to={'?'+page}>{page}
-                </NavLink>
+                <span onClick={props.changePage}>
+                    <NavLink
+                        key={page}
+                        className={activePage(page) ? classes.Active : null}
+                        to={'?'+page}>{page}
+                    </NavLink>
+                </span>
             );
         }
     }

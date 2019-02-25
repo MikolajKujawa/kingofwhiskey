@@ -3,8 +3,7 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-      1. Add Redux
-      2. Authorization system
+      1. Authorization system
       *Optimization code
  */
 

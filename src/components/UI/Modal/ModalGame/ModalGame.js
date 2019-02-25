@@ -9,11 +9,10 @@ const modalGame = (props) => {
         string.charAt(0).toUpperCase() + string.slice(1)
     );
 
-    let Img;
+    let Img=null;
     let inputs;
 
-    if (props.state.loadingData) {
-        Img=null;
+    if (props.state.loading) {
         inputs=<Spinner />;
     } else {
         Img = (
@@ -26,11 +25,6 @@ const modalGame = (props) => {
                 </p>
             </div>
         );
-
-        if (props.state.loading) {
-            Img = <Spinner />
-        }
-
         inputs = Object.keys(props.state.value)
             .map(key => {
                 return (
