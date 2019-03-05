@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './Auth.css';
-import  { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -125,15 +124,8 @@ class Auth extends Component {
             ));
         }
 
-        let authRedirect = null;
-
-        if (this.props.isAuth === true) {
-            authRedirect = <Redirect to="/" />
-        }
-
         return (
             <div className={classes.Auth}>
-                {authRedirect}
                 {error}
                 <form onSubmit={this.submitHandler}>
                     {form}

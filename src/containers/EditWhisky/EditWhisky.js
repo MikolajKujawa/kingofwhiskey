@@ -12,10 +12,6 @@ import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEdit
 import Validation from '../../components/ValidationSystem/ValidationSystem';
 
 class EditWhisky extends PureComponent {
-    state = {
-        changePage: false
-    };
-
     componentDidUpdate(prevProps) {
         if (prevProps.location.search !== this.props.location.search) {
             this.props.onLoadFetchData(this.props.location.search.substring(1));
@@ -25,12 +21,6 @@ class EditWhisky extends PureComponent {
     componentDidMount() {
         this.props.onLoadFetchData(this.props.location.search.substring(1));
     }
-
-    changePageActionHandler = () => {
-        this.setState({
-            changePage: !this.state.changePage
-        });
-    };
 
     changeWhiskyDataHandler = (event) => {
         let id=event.target.id;
@@ -75,7 +65,6 @@ class EditWhisky extends PureComponent {
             <React.Fragment>
                 <ModalEditWhisky
                     state={this.props.state}
-                    changePage={this.changePageActionHandler}
                     change={this.props.isAdmin ? this.changeWhiskyDataHandler : null}
                     edit={this.props.isAdmin ? this.editWhiskyDataHandler : null} />
             </React.Fragment>
@@ -98,4 +87,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(withRouter(EditWhisky), axios));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(EditWhisky, axios)));

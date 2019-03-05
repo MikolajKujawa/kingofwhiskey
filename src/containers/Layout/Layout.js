@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import classes from './Layout.css';
-import { Route, Switch, withRouter } from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
@@ -51,21 +51,28 @@ class Layout extends Component {
     };
 
     render() {
+        //console.log(this.props.isAdmin);
         const aboutComponent = (
             <About
                 show={this.state.showModal}
                 modalToggle={this.modalToggleHandler} />
         );
 
-        const notFoundError = (
-            <Window
-                show={!this.state.showModal}
-                modalToggle={() => this.modalToggleHandler(true)}>
-                <div style={{paddingBottom: '25px', textAlign: 'center', margin: 'auto'}}>
-                    <h2>Error 404</h2>This page does not exist!
-                </div>
-            </Window>
-        );
+        const notFoundError = () => {
+            if (this.props.history.location.pathname === "/auth") {
+                return <Redirect to="/" />
+            }
+
+            return (
+                <Window
+                    show={!this.state.showModal}
+                    modalToggle={() => this.modalToggleHandler(true)}>
+                    <div style={{paddingBottom: '25px', textAlign: 'center', margin: 'auto'}}>
+                        <h2>Error 404</h2>This page does not exist!
+                    </div>
+                </Window>
+            )
+        };
 
         return (
             <React.Fragment>
@@ -113,7 +120,7 @@ class Layout extends Component {
                             <Suspense fallback={<div>Loading...</div>}>
                                 <GameLogic />
                             </Suspense>} />
-                        <Route render={() => notFoundError} />
+                        <Route render={() => notFoundError()} />
                     </Switch>
                 </main>
             </React.Fragment>
@@ -124,7 +131,7 @@ class Layout extends Component {
 const mapStateToProps = state => {
     return {
         isAuth: state.auth.token !== null,
-        isAdmin: state.auth.isAdmin !== null
+        isAdmin: state.auth.isAdmin
     };
 };
 
