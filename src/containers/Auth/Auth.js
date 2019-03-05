@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classes from './Auth.css';
-import axios from 'axios';
 
 // Redux
 import * as actions from '../../store/actions/index';
@@ -11,7 +10,6 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
-import withErrorHandler from '../../hoc/withErrorHandler';
 
 class Auth extends Component {
     state = {
@@ -66,7 +64,13 @@ class Auth extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
+	const updatedControls = { ...this.state.controls };
+
+	if (this.state.controls.password.value === '') updatedControls.password.touched = true;
+	else if (this.state.controls.email.value === '') updatedControls.email.touched = true;
+	else return this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
+
+	this.setState({ controls: updatedControls });
     };
 
     switchAuthModeHandler = () => {
@@ -169,4 +173,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Auth, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
