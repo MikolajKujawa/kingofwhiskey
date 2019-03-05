@@ -17,3 +17,9 @@ export {
     editWhiskyData,
     changeWhiskyData
 } from './editWhisky';
+
+export {
+    auth,
+    logout,
+    authCheckState
+} from './auth'

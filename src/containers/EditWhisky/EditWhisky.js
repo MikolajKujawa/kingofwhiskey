@@ -76,8 +76,8 @@ class EditWhisky extends PureComponent {
                 <ModalEditWhisky
                     state={this.props.state}
                     changePage={this.changePageActionHandler}
-                    change={this.changeWhiskyDataHandler}
-                    edit={this.editWhiskyDataHandler} />
+                    change={this.props.isAdmin ? this.changeWhiskyDataHandler : null}
+                    edit={this.props.isAdmin ? this.editWhiskyDataHandler : null} />
             </React.Fragment>
         );
     }
@@ -85,7 +85,8 @@ class EditWhisky extends PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        state: state.editWhisky
+        state: state.editWhisky,
+        isAdmin: state.auth.isAdmin
     };
 };
 

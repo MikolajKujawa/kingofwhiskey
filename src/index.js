@@ -12,6 +12,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import newWhiskyReducer from './store/reducers/newWhisky';
 import gameReducer from './store/reducers/game';
 import editWhiskyReducer from './store/reducers/editWhisky';
+import authReducer from './store/reducers/auth';
 
 axios.defaults.baseURL = "https://kingofwhiskey-27cda.firebaseio.com"; // Default Axios URL
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     game: gameReducer,
     newWhisky: newWhiskyReducer,
     editWhisky: editWhiskyReducer,
+    auth: authReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(
