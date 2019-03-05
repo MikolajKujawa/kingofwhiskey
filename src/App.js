@@ -3,7 +3,6 @@ import Layout from './containers/Layout/Layout';
 
 /*
   TODO:
-      1. Authorization system
       *Optimization code
  */
 

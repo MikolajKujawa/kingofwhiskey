@@ -1,0 +1,41 @@
+.Auth {
+    margin: 3em auto;
+    text-align: center;
+    max-width: 80%;
+    animation-name: Start;
+    animation-duration: 500ms;
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+@-webkit-keyframes Start {
+    from {transform: translateY(100em);}
+    to {transform: translateX(0);}
+}
+
+.flex-form {
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+    background: #ddd;
+    border: 0;
+    line-height: 50px;
+    font-size: 1rem;
+    border-radius: 0;
+    outline: 0;
+    -webkit-appearance: none;
+}
+
+.flex-form input {
+    text-align: center;
+}
+
+.Error {
+    font-weight: bold;
+    color: #944317;
+}
+
+@media (min-width: 600px) {
+    .Auth {
+        width: 400px;
+    }
+}

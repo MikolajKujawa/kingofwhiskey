@@ -42,7 +42,6 @@ export const fetchData = (page) => {
         dispatch(loading(true));
         axios.get('/whisky.json')
             .then(res => {
-                console.log('test');
                 const whisky=[];
                 const value=[];
                 const fbKey=[];

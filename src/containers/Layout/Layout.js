@@ -1,6 +1,8 @@
 import React, { Component, Suspense } from 'react';
 import classes from './Layout.css';
-import { Route, Switch } from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 // Components
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
@@ -12,12 +14,18 @@ import Window from "../../components/UI/Window/Window";
 const GameLogic = React.lazy(() => import('../GameLogic/GameLogic'));
 const NewWhisky = React.lazy(() => import('../NewWhisky/NewWhisky'));
 const EditWhisky = React.lazy(() => import('../EditWhisky/EditWhisky'));
+const Auth = React.lazy(() => import('../Auth/Auth'));
+const Logout = React.lazy(() => import('../Auth/Logout/Logout'));
 
 class Layout extends Component {
     state = {
         showSideDrawer: false,
         showModal: false
     };
+
+    componentDidMount() {
+        this.props.onAuthCheckState();
+    }
 
     sideDrawerClosedHandler = () => {
         this.setState({ showSideDrawer: false })
@@ -29,12 +37,17 @@ class Layout extends Component {
         });
     };
 
-    modalToggleHandler = () => {
-        this.setState((prevState) => {
-            return {
-                showModal: !prevState.showModal,
-                showSideDrawer: !prevState.showSideDrawer };
-        })
+    modalToggleHandler = (modal) => {
+        if (modal === true) {
+            this.props.history.replace('/');
+        } else {
+            this.setState((prevState) => {
+                return {
+                    showModal: !prevState.showModal,
+                    showSideDrawer: !prevState.showSideDrawer
+                };
+            })
+        }
     };
 
     render() {
@@ -44,23 +57,33 @@ class Layout extends Component {
                 modalToggle={this.modalToggleHandler} />
         );
 
-        const notFoundError = (
-            <Window
-                show={!this.state.showModal}
-                modalToggle={null}>
-                <div style={{paddingBottom: '25px', textAlign: 'center', margin: 'auto'}}>
-                    <h2>Error 404</h2>This page does not exist!
-                </div>
-            </Window>
-        );
+        const notFoundError = () => {
+            if (this.props.history.location.pathname === "/auth") {
+                return <Redirect to="/" />
+            }
+
+            return (
+                <Window
+                    show={!this.state.showModal}
+                    modalToggle={() => this.modalToggleHandler(true)}>
+                    <div style={{paddingBottom: '25px', textAlign: 'center', margin: 'auto'}}>
+                        <h2>Error 404</h2>This page does not exist!
+                    </div>
+                </Window>
+            )
+        };
 
         return (
             <React.Fragment>
                 <Toolbar
+                    isAuth={this.props.isAuth}
+                    isAdmin={this.props.isAdmin}
                     activeAbout={this.state.showModal}
                     toggleAbout={this.modalToggleHandler}
                     drawerToggleClicked={this.sideDrawerToggleHandler} />
                 <SideDrawer
+                    isAuth={this.props.isAuth}
+                    isAdmin={this.props.isAdmin}
                     activeAbout={this.state.showModal}
                     toggleAbout={this.modalToggleHandler}
                     closed={this.sideDrawerClosedHandler}
@@ -68,19 +91,35 @@ class Layout extends Component {
                 { this.state.showModal ? aboutComponent : null }
                 <main className={classes.Content}>
                     <Switch>
-                        <Route path="/addWhisky" render={() =>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <NewWhisky />
-                            </Suspense>} />
-                        <Route path="/editWhisky" render={() =>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <EditWhisky />
-                            </Suspense>} />
+                        { this.props.isAuth
+                        ? <Route path="/addWhisky" render={() =>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <NewWhisky />
+                                </Suspense>} />
+                        : null }
+
+                        { this.props.isAuth
+                        ? <Route path="/editWhisky" render={() =>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <EditWhisky />
+                                </Suspense>} />
+                        : null }
+
+                        { this.props.isAuth
+                        ? <Route path="/logout" render={() =>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <Logout />
+                                </Suspense>} />
+                        : <Route path="/auth" render={() =>
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <Auth />
+                                </Suspense>} /> }
+
                         <Route path="/" exact render={() =>
                             <Suspense fallback={<div>Loading...</div>}>
                                 <GameLogic />
                             </Suspense>} />
-                        <Route render={() => notFoundError} />
+                        <Route render={() => notFoundError()} />
                     </Switch>
                 </main>
             </React.Fragment>
@@ -88,4 +127,17 @@ class Layout extends Component {
     }
 }
 
-export default Layout;
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.token !== null,
+        isAdmin: state.auth.isAdmin
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuthCheckState: () => dispatch(actions.authCheckState())
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
