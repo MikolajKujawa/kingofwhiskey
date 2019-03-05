@@ -27,11 +27,12 @@
 }
 
 .Invalid {
-    border: 1px solid red;
+    border: 1px solid #944317;
     background-color: salmon;
 }
 
 .Error {
-    color: red;
-    margin: 10px 0;
+    font-weight: bold;
+    color: #944317;
+    margin: 0;
 }

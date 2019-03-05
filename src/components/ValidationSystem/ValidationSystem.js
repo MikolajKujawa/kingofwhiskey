@@ -1,4 +1,4 @@
-const validationSystem = (rules, value) => {
+const validationSystem = (value, rules) => {
     let isValid = true;
 
     if (!rules) {

@@ -107,7 +107,8 @@ class Auth extends Component {
             })
         }
 
-        let form = <Spinner />;
+        let login = <Spinner />;
+        let form = null;
 
         if(!this.props.loading) {
             form = formElementsArray.map(inputEl => (
@@ -124,16 +125,26 @@ class Auth extends Component {
             ));
         }
 
+        if(!this.props.loading) {
+            login = (
+                <React.Fragment>
+                    {error}
+                    <form onSubmit={this.submitHandler}>
+                        {form}
+                        <Button btnType="Success">SUBMIT</Button>
+                    </form>
+                    <Button
+                        clicked={this.switchAuthModeHandler}
+                        btnType="Danger">SWITCH TO {this.state.isSingUp ? 'SIGN IN' : 'SIGN UP'}</Button>
+                </React.Fragment>
+            )
+        }
+
         return (
             <div className={classes.Auth}>
-                {error}
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button btnType="Success">SUBMIT</Button>
-                </form>
-                <Button
-                    clicked={this.switchAuthModeHandler}
-                    btnType="Danger">SWITCH TO {this.state.isSingUp ? 'SIGN IN' : 'SIGN UP'}</Button>
+                <div className={classes["flex-form"]}>
+                    {login}
+                </div>
             </div>
         );
     };
