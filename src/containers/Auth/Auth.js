@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import classes from './Auth.css';
+import axios from 'axios';
 
+// Redux
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
+
+// Components
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Validation from '../../components/ValidationSystem/ValidationSystem';
-
-import * as actions from '../../store/actions/index';
-import { connect } from 'react-redux';
+import withErrorHandler from '../../hoc/withErrorHandler';
 
 class Auth extends Component {
     state = {
@@ -51,8 +55,8 @@ class Auth extends Component {
                 ...this.state.controls[controlName],
                 value: event.target.value,
                 valid: Validation(
-                    event.target.value,
-                    this.state.controls[controlName].validation
+                    this.state.controls[controlName].validation,
+                    event.target.value
                 ),
                 touched: true
             }
@@ -165,4 +169,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Auth, axios));

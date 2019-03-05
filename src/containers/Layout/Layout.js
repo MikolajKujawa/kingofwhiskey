@@ -51,7 +51,6 @@ class Layout extends Component {
     };
 
     render() {
-        //console.log(this.props.isAdmin);
         const aboutComponent = (
             <About
                 show={this.state.showModal}
