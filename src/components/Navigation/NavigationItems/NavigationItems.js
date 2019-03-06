@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './NavigationItems.css';
+import { withRouter } from "react-router-dom";
 
 import NavigationItem from './NavigationItem/NavigationItem';
 
@@ -19,8 +20,8 @@ const navigationItems = (props) => (
             ? <NavigationItem link="/logout" closed={props.closed}>Logout</NavigationItem>
             : <NavigationItem link="/auth" closed={props.closed}>Authentication</NavigationItem> }
 
-        <NavigationItem link="#" toggleAbout={props.toggleAbout}>About</NavigationItem>
+        <NavigationItem link={props.history.location.search + "#"} toggleAbout={props.toggleAbout}>About</NavigationItem>
     </ul>
 );
 
-export default navigationItems;
+export default withRouter(navigationItems);

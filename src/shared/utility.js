@@ -1,3 +1,5 @@
+import React, {Suspense} from "react";
+
 export const updateObject = (oldObject, newProps) => {
     return {
         ...oldObject,
@@ -12,3 +14,9 @@ export const returnError = (oldState, error) => {
         loading: false
     };
 };
+
+export const dynamicSuspense = (component) => (
+    <Suspense fallback={<div>Loading...</div>}>
+        { component }
+    </Suspense>
+);

@@ -1,17 +1,18 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import classes from './Layout.css';
-import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 // Components
+import GameLogic from '../GameLogic/GameLogic';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 import About from '../../components/UI/Window/About/About';
 import Window from "../../components/UI/Window/Window";
+import { dynamicSuspense } from "../../shared/utility";
 
 // Lazy containers
-const GameLogic = React.lazy(() => import('../GameLogic/GameLogic'));
 const NewWhisky = React.lazy(() => import('../NewWhisky/NewWhisky'));
 const EditWhisky = React.lazy(() => import('../EditWhisky/EditWhisky'));
 const Auth = React.lazy(() => import('../Auth/Auth'));
@@ -89,36 +90,22 @@ class Layout extends Component {
                     closed={this.sideDrawerClosedHandler}
                     open={this.state.showSideDrawer} />
                 { this.state.showModal ? aboutComponent : null }
+
                 <main className={classes.Content}>
                     <Switch>
                         { this.props.isAuth
-                        ? <Route path="/addWhisky" render={() =>
-                                <Suspense fallback={<div>Loading...</div>}>
-                                    <NewWhisky />
-                                </Suspense>} />
+                        ? <Route path="/addWhisky" render={() => dynamicSuspense(<NewWhisky />)} />
                         : null }
 
                         { this.props.isAuth
-                        ? <Route path="/editWhisky" render={() =>
-                                <Suspense fallback={<div>Loading...</div>}>
-                                    <EditWhisky />
-                                </Suspense>} />
+                        ? <Route path="/editWhisky" render={() => dynamicSuspense(<EditWhisky />)} />
                         : null }
 
                         { this.props.isAuth
-                        ? <Route path="/logout" render={() =>
-                                <Suspense fallback={<div>Loading...</div>}>
-                                    <Logout />
-                                </Suspense>} />
-                        : <Route path="/auth" render={() =>
-                                <Suspense fallback={<div>Loading...</div>}>
-                                    <Auth />
-                                </Suspense>} /> }
+                        ? <Route path="/logout" render={() => dynamicSuspense(<Logout />)} />
+                        : <Route path="/auth" render={() => dynamicSuspense(<Auth />)} /> }
 
-                        <Route path="/" exact render={() =>
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <GameLogic />
-                            </Suspense>} />
+                        <Route path="/" exact component={ GameLogic } />
                         <Route render={() => notFoundError()} />
                     </Switch>
                 </main>

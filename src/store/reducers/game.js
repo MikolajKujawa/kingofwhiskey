@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { returnError, updateObject } from '../utility';
+import { returnError, updateObject } from '../../shared/utility';
 
 const initState = {
     loading: true
