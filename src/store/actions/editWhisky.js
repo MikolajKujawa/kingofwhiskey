@@ -45,15 +45,18 @@ export const fetchData = (page) => {
                 const whisky=[];
                 const value=[];
                 const fbKey=[];
+                const id=[];
                 let changeValue=[];
+
                 for (let key in res.data) {
                     for (let key2 in res.data[key]) {
                         whisky.push({ ...res.data[key][key2] });
                         value.push({ ...res.data[key][key2] });
                         changeValue.push({ ...res.data[key][key2] });
                         fbKey.push({ key2 });
+                        id.push({ key });
                         for (let key3 in res.data[key][key2]) {
-                            changeValue[key][key3]=false;
+                            changeValue[key][key3] = false;
                         }
                     }
                 }
@@ -70,6 +73,7 @@ export const fetchData = (page) => {
                             value: { ...value.slice(range, range+5) },
                             changeValue: { ...changeValue.slice(range, range+5) },
                             fbKey: { ...fbKey.slice(range, range+5) },
+                            id: { ...id.slice(range, range+5) },
                             pages: pages,
                             currentPage: page,
                         };

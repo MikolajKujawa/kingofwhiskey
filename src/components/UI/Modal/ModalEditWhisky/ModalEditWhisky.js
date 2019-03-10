@@ -29,18 +29,22 @@ const modalEditWhisky = (props) => {
                             alt="whisky_img" />
                         </p>
                     </div>,
-                    Object.keys((props.state.whisky[key]))
+                    Object.keys(props.state.whisky[key])
                         .map(key2 => {
+                            if (key2 === 'userId') return null;
+                            let editPermission = props.isAdmin;
+                            if (props.state.value[key].userId === props.userId) editPermission = true;
                             return (
                                 <InputModal
                                     key={key+key2}
                                     changeValue={props.state.changeValue[key][key2]}
                                     value={props.state.value[key][key2]}
                                     name={key2} inputName={capitalize(key2)}
-                                    id={key}
+                                    id={props.state.id[key].key}
+                                    editPermission={editPermission}
                                     disabled={!props.state.changeValue[key][key2]}
-                                    change={props.change}
-                                    edit={props.edit} />
+                                    change={editPermission ? (event) => props.change(event, key) : null}
+                                    edit={editPermission ? (event) => props.edit(event,key) : null} />
                             );
                         })
                 ]

@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './containers/Layout/Layout';
 
-/*
-  TODO:
-      *Optimization code
- */
-
 class App extends Component {
   render() {
     return (

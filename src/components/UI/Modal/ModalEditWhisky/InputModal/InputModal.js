@@ -6,9 +6,11 @@ const inputModal = (props) => {
         <input
             key={props.whisky+"input"}
             className={props.changeValue ? classes.Change : null}
+            style={ !props.editPermission ? { cursor: "not-allowed", width: "250px" } : null }
             id={props.id}
             value={props.value}
             type="search"
+            disabled={!props.editPermission}
             name={props.name}
             placeholder={props.inputName}
             onChange={props.change}/>,
@@ -17,6 +19,7 @@ const inputModal = (props) => {
             disabled={props.disabled}
             type="button"
             className={props.changeValue ? classes.Change : null}
+            style={ !props.editPermission ? { display: "none" } : null }
             name={props.name}
             id={props.id}
             onClick={props.edit}>Edit

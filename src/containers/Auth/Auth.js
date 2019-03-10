@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Validation from '../../components/ValidationSystem/ValidationSystem';
+import { validationSystem } from '../../shared/utility';
 
 class Auth extends Component {
     state = {
@@ -23,7 +23,8 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 3
+                    minLength: 5,
+                    email: true
                 },
                 valid: false,
                 touched: false
@@ -37,7 +38,8 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    minLength: 6,
+                    password: true
                 },
                 valid: false,
                 touched: false
@@ -52,7 +54,7 @@ class Auth extends Component {
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: Validation(
+                valid: validationSystem(
                     this.state.controls[controlName].validation,
                     event.target.value
                 ),
@@ -64,13 +66,13 @@ class Auth extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-	const updatedControls = { ...this.state.controls };
+        const updatedControls = { ...this.state.controls };
 
-	if (this.state.controls.password.value === '') updatedControls.password.touched = true;
-	else if (this.state.controls.email.value === '') updatedControls.email.touched = true;
-	else return this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
+        if (this.state.controls.password.value === '') updatedControls.password.touched = true;
+        else if (this.state.controls.email.value === '') updatedControls.email.touched = true;
+        else return this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSingUp);
 
-	this.setState({ controls: updatedControls });
+        this.setState({ controls: updatedControls });
     };
 
     switchAuthModeHandler = () => {

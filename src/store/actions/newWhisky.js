@@ -37,13 +37,17 @@ export const fetchDataFailed = (err) => {
     };
 };
 
-export const putNewWhisky = (newWhisky) => {
+export const putNewWhisky = (newWhisky, token, userId) => {
     return dispatch => {
         dispatch(loading(true));
         axios.get('/whisky.json')
             .then(res => {
                 const nextRecord = res.data.length;
-                axios.post('/whisky/' + nextRecord + '.json', newWhisky)
+                const whiskyData = {
+                    ...newWhisky,
+                    userId: userId
+                };
+                axios.post('/whisky/' + nextRecord + '.json?auth=' + token, whiskyData)
                     .then(res => {
                         dispatch(loadDefaultValueNW());
                         return res;

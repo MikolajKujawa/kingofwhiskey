@@ -27,6 +27,7 @@ const modalGame = (props) => {
         );
         inputs = Object.keys(props.state.value)
             .map(key => {
+                if (key==='userId') return null;
                 return (
                     <InputModal
                         key={key}

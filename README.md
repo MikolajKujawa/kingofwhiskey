@@ -33,6 +33,17 @@ images.
 - Node <i>11.9.0</i>  
 - Webpack <i>4.19.1</i> 
 
+### ToDo list
+
+- Add search system in Whisky List :heavy_minus_sign:
+- Add Your Whisky page :heavy_minus_sign:
+- Add unit testing :heavy_minus_sign:
+- Clear and upgrade quality of code :heavy_minus_sign:
+
+#### Legend:
+:heavy_minus_sign: - I am working on it now \
+:x: - I done not start work on this
+
 ### WebStrong &copy;  
   
 This web was created by **Mateusz Pijanowski** (<i>WebStrong team</i>) <br />

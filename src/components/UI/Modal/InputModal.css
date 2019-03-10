@@ -118,6 +118,15 @@ input.Correct {
     opacity: 1;
 }
 
+.Hidden {
+    display: none;
+}
+
+.User {
+    width: 250px;
+    cursor: not-allowed;
+}
+
 @media (max-width: 1050px) {
     .Tooltip .TooltipText {
         bottom: 0;

@@ -8,7 +8,7 @@ import * as actions from '../../store/actions/index';
 // Components
 import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalAddWhisky from '../../components/UI/Modal/ModalAddWhisky/ModalAddWhisky';
-import Validation from '../../components/ValidationSystem/ValidationSystem';
+import { validationSystem } from '../../shared/utility';
 
 class NewWhisky extends PureComponent {
     componentDidMount() {
@@ -18,7 +18,7 @@ class NewWhisky extends PureComponent {
     confirmDataHandler = (event) => {
         let confirmStateCopy = { ...this.props.state.confirm };
 
-        if (Validation(this.props.state.validation[event.target.name], this.props.state.whisky[event.target.name])) {
+        if (validationSystem(this.props.state.validation[event.target.name], this.props.state.whisky[event.target.name])) {
             confirmStateCopy[event.target.name]=1;
             this.props.onConfirmData(confirmStateCopy);
         } else {
@@ -37,7 +37,7 @@ class NewWhisky extends PureComponent {
             }, 0);
 
         if (confirmSum===confirmStateCopy.length && confirmSum>1) {
-            this.props.onAddNewWhisky(this.props.state.whisky);
+            this.props.onAddNewWhisky(this.props.state.whisky, this.props.token, this.props.userId);
         }
     };
 
@@ -56,13 +56,15 @@ class NewWhisky extends PureComponent {
 const mapStateToProps = state => {
     return {
         state: state.newWhisky,
+        userId: state.auth.userId,
+        token: state.auth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onDefaultValue: () => dispatch(actions.loadDefaultValueNW()),
-        onAddNewWhisky: (newWhisky) => dispatch(actions.putNewWhisky(newWhisky)),
+        onAddNewWhisky: (newWhisky, token, userId) => dispatch(actions.putNewWhisky(newWhisky, token, userId)),
         onUpdateNewWhiskyData: (name, value) => dispatch(actions.updateNewWhiskyData(name, value)),
         onConfirmData: (confirm) => dispatch(actions.confirmData(confirm))
     };
