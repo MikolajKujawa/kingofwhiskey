@@ -20,7 +20,7 @@ const navigationItems = (props) => (
             ? <NavigationItem link="/logout" closed={props.closed}>Logout</NavigationItem>
             : <NavigationItem link="/auth" closed={props.closed}>Authentication</NavigationItem> }
 
-        <NavigationItem link={props.history.location.search + "#"} toggleAbout={props.toggleAbout}>About</NavigationItem>
+        <NavigationItem link={props.history.location.search + "#"} closed={props.closed} toggleAbout={props.toggleAbout}>About</NavigationItem>
     </ul>
 );
 

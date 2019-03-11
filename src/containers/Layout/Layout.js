@@ -28,10 +28,6 @@ class Layout extends Component {
         this.props.onAuthCheckState();
     }
 
-    sideDrawerClosedHandler = () => {
-        this.setState({ showSideDrawer: false })
-    };
-
     sideDrawerToggleHandler = () => {
         this.setState((prevState) => {
             return { showSideDrawer: !prevState.showSideDrawer };
@@ -44,8 +40,7 @@ class Layout extends Component {
         } else {
             this.setState((prevState) => {
                 return {
-                    showModal: !prevState.showModal,
-                    showSideDrawer: !prevState.showSideDrawer
+                    showModal: !prevState.showModal
                 };
             })
         }
@@ -87,7 +82,7 @@ class Layout extends Component {
                     isAdmin={this.props.isAdmin}
                     activeAbout={this.state.showModal}
                     toggleAbout={this.modalToggleHandler}
-                    closed={this.sideDrawerClosedHandler}
+                    closed={this.sideDrawerToggleHandler}
                     open={this.state.showSideDrawer} />
                 { this.state.showModal ? aboutComponent : null }
 
