@@ -1,5 +1,6 @@
 # King Of Whiskey
 [![Build Status](https://travis-ci.org/mateuszpijanowski/kingofwhiskey.svg?branch=master)](https://travis-ci.org/mateuszpijanowski/kingofwhiskey)
+[![BCH compliance](https://bettercodehub.com/edge/badge/mateuszpijanowski/kingofwhiskey?branch=master)](https://bettercodehub.com/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/be242f74-868e-45a3-8a50-2e40efad3843/deploy-status)](https://app.netlify.com/sites/kingofwhiskey/deploys)
 
 **KingOfWhiskey** is a web application where whisky fans can check yourself 
@@ -36,8 +37,8 @@ images.
 ### ToDo list
 
 - Add search system in Whisky List :heavy_minus_sign:
-- Add Your Whisky page :heavy_minus_sign:
-- Add unit testing :heavy_minus_sign:
+- Create Your Whisky page :heavy_minus_sign:
+- Add unit testing :x:
 - Clear and upgrade quality of code :heavy_minus_sign:
 
 #### Legend:
