@@ -17,6 +17,10 @@ const navigationItems = (props) => (
         : null }
 
         { props.isAuth
+            ? <NavigationItem link="/yourWhisky" closed={props.closed}>Your Whisky</NavigationItem>
+            : null }
+
+        { props.isAuth
             ? <NavigationItem link="/logout" closed={props.closed}>Logout</NavigationItem>
             : <NavigationItem link="/auth" closed={props.closed}>Authentication</NavigationItem> }
 

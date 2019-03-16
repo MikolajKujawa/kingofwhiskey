@@ -22,7 +22,7 @@
     height: 130%;
 }
 
-@media (max-width: 719px) {
+@media (max-width: 995px) {
     .OnlyDesktop {
         display: none;
     }

@@ -93,8 +93,12 @@ class Layout extends Component {
                         : null }
 
                         { this.props.isAuth
-                        ? <Route path="/editWhisky" render={() => dynamicSuspense(<EditWhisky />)} />
+                        ? <Route path="/editWhisky" render={() => dynamicSuspense(<EditWhisky yourWhisky={false} />)} />
                         : null }
+
+                        { this.props.isAuth
+                            ? <Route path="/yourWhisky" render={() => dynamicSuspense(<EditWhisky yourWhisky={true} />)} />
+                            : null }
 
                         { this.props.isAuth
                         ? <Route path="/logout" render={() => dynamicSuspense(<Logout />)} />

@@ -37,7 +37,7 @@ export const fetchDataFailed = (err) => {
     };
 };
 
-export const fetchData = (page) => {
+export const fetchData = (page, userId, yourWhisky) => {
     return dispatch => {
         dispatch(loading(true));
         axios.get('/whisky.json')
@@ -47,16 +47,31 @@ export const fetchData = (page) => {
                 const fbKey=[];
                 const id=[];
                 let changeValue=[];
+                let i = 0;
 
                 for (let key in res.data) {
                     for (let key2 in res.data[key]) {
-                        whisky.push({ ...res.data[key][key2] });
-                        value.push({ ...res.data[key][key2] });
-                        changeValue.push({ ...res.data[key][key2] });
-                        fbKey.push({ key2 });
-                        id.push({ key });
-                        for (let key3 in res.data[key][key2]) {
-                            changeValue[key][key3] = false;
+                        if (yourWhisky) {
+                            if (res.data[key][key2].userId === userId) {
+                                whisky.push({ ...res.data[key][key2] });
+                                value.push({ ...res.data[key][key2] });
+                                changeValue.push({ ...res.data[key][key2] });
+                                fbKey.push({ key2 });
+                                id.push({ key });
+                                for (let key3 in res.data[key][key2]) {
+                                    changeValue[i][key3] = false;
+                                }
+                                i++;
+                            }
+                        } else {
+                            whisky.push({ ...res.data[key][key2] });
+                            value.push({ ...res.data[key][key2] });
+                            changeValue.push({ ...res.data[key][key2] });
+                            fbKey.push({ key2 });
+                            id.push({ key });
+                            for (let key3 in res.data[key][key2]) {
+                                changeValue[key][key3] = false;
+                            }
                         }
                     }
                 }
