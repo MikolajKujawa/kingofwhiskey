@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
@@ -11,15 +11,15 @@ import withErrorHandler from '../../hoc/withErrorHandler';
 import ModalEditWhisky from '../../components/UI/Modal/ModalEditWhisky/ModalEditWhisky';
 import { validationSystem } from '../../shared/utility';
 
-class EditWhisky extends PureComponent {
+class EditWhisky extends Component {
     componentDidUpdate(prevProps) {
-        if (prevProps.location.search !== this.props.location.search) {
-            this.props.onLoadFetchData(this.props.location.search.substring(1));
+        if (prevProps.location.search !== this.props.location.search || prevProps.location.pathname !== this.props.location.pathname) {
+            this.props.onLoadFetchData(this.props.location.search.substring(1), this.props.userId, this.props.yourWhisky);
         }
     }
 
     componentDidMount() {
-        this.props.onLoadFetchData(this.props.location.search.substring(1));
+        this.props.onLoadFetchData(this.props.location.search.substring(1), this.props.userId, this.props.yourWhisky);
     }
 
     changeWhiskyDataHandler = (event, key) => {
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLoadFetchData: (page) => dispatch(actions.fetchData(page)),
+        onLoadFetchData: (page, userId, yourWhisky) => dispatch(actions.fetchData(page, userId, yourWhisky)),
         onChangeWhiskyData: (value) => dispatch(actions.changeWhiskyData(value)),
         onEditWhiskyData: (whisky, changeValue) => dispatch(actions.editWhiskyData(whisky, changeValue))
     };

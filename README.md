@@ -36,8 +36,6 @@ images.
 
 ### ToDo list
 
-- Add search system in Whisky List :heavy_minus_sign:
-- Create Your Whisky page :heavy_minus_sign:
 - Add unit testing :x:
 - Clear and upgrade quality of code :heavy_minus_sign:
 
