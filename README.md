@@ -28,6 +28,7 @@ images.
 - React Redux <i>6.0.1</i>  
 - Redux <i>4.0.1</i>  
 - Redux Thunk <i>2.3.0+</i>  
+- React Transition Group <i>2.6.1+</i>  
 - Firebase 
 - Axios <i>18.0+</i>   
 - Babel <i>7.0</i>  

@@ -84,7 +84,7 @@ class Layout extends Component {
                     toggleAbout={this.modalToggleHandler}
                     closed={this.sideDrawerToggleHandler}
                     open={this.state.showSideDrawer} />
-                { this.state.showModal ? aboutComponent : null }
+                { aboutComponent }
 
                 <main className={classes.Content}>
                     <Switch>

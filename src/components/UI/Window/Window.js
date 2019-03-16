@@ -1,21 +1,32 @@
 import React from 'react';
 import classes from './Window.css';
+import './Window.css';
+import CSSTransition from 'react-transition-group/CSSTransition';
 
 import Backdrop from '../Backdrop/Backdrop';
 
 const window = (props) => {
-    let attachedClasses = [classes.Modal, classes.Close];
-
-    if (props.show) {
-        attachedClasses = [classes.Modal];
-    }
+    const animationTiming = {
+        enter: 400,
+        exit: 600
+    };
 
     return (
         <React.Fragment>
             <Backdrop show={props.show} clicked={props.modalToggle}/>
-            <div className={ attachedClasses.join(' ') }>
-                {props.children}
-            </div>
+            <CSSTransition
+                in={props.show}
+                timeout={animationTiming}
+                mountOnEnter
+                unmountOnExit
+                classNames={{
+                    enterActive: classes["fade-enter-active"],
+                    exitActive: classes["fade-exit-active"]
+                }}>
+                <div className={ classes.Modal }>
+                    {props.children}
+                </div>
+            </CSSTransition>
         </React.Fragment>
     )
 };
